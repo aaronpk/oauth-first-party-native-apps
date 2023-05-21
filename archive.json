@@ -1,0 +1,345 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-05-21T01:22:52.415436+00:00",
+  "repo": "aaronpk/oauth-first-party-native-apps",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOJbxyLc5lMgeX",
+      "title": "Name of challenge endpoint",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/1",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Do we need a new name for the challenge endpoint?",
+      "createdAt": "2023-05-05T15:05:08Z",
+      "updatedAt": "2023-05-05T15:05:08Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOJbxyLc5lMjL3",
+      "title": "Response Mode",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/2",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "What profiling would we need to make to ensure that the new endpoint accepts any parameter the authorization end-point. The goal is to allow layering and use of other OAuth capabilities. Do we borrow from PAR?",
+      "createdAt": "2023-05-05T15:13:08Z",
+      "updatedAt": "2023-05-05T15:14:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOJbxyLc5lMjnX",
+      "title": "OIDC compatibility",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/3",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Would we need a second profile to use this with OpenID Connect? How do we expect an AS that supports both OAuth and OIDC to implement this endpoint.\r\n\r\nAaron - make sure this is possible without breaking anything.\r\n\r\nGeorge - provide some guidance on what behaviour we want. Get AS behaviour consistent to simplify native implementations (no AS specific code needed). One idea - use examples from OIDC in a non-normative way.\r\n\r\nOmniAuth - maintains a list of providers their library supports. \r\n\r\nAaron- 2 classes of implementors. (1) proprietary (2) those using OIDC ",
+      "createdAt": "2023-05-05T15:14:25Z",
+      "updatedAt": "2023-05-05T15:27:10Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOJbxyLc5lMpSG",
+      "title": "Fallback to web, model on PAR ",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/5",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "When falling back to the web give a PAR-like response",
+      "createdAt": "2023-05-05T15:32:03Z",
+      "updatedAt": "2023-05-05T15:32:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOJbxyLc5lMrTb",
+      "title": "Clarify that mobile app starts the flow with this endpoint",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/6",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-05-05T15:38:38Z",
+      "updatedAt": "2023-05-05T15:38:38Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOJbxyLc5lMsPN",
+      "title": "Be prescriptive on how client authentication is used",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/7",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "If client authentication is used, don't ship client secrets in the binary. e.g. use dynamic client registration instead. Look at what PAR and ensure it can be used here. ",
+      "createdAt": "2023-05-05T15:41:39Z",
+      "updatedAt": "2023-05-05T15:41:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOJbxyLc5lMsaZ",
+      "title": "How to layer DPoP on top of this flow",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/8",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Explore if anything is needed to support DPoP",
+      "createdAt": "2023-05-05T15:42:14Z",
+      "updatedAt": "2023-05-05T15:42:14Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOJbxyLc5mCbL_",
+      "title": "Should we allow 3rd party apps as long as the only challenge method is passkey?",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/9",
+      "state": "OPEN",
+      "author": "gffletch",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The current draft lists the requirements as \"MUST NOT\" allow 3rd party clients to use this specification. Do we want to be that strong? Or leave it as is for now and change it later when there is more data and maybe implementation experience?",
+      "createdAt": "2023-05-16T12:19:20Z",
+      "updatedAt": "2023-05-16T12:19:20Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOJbxyLc5mCeB6",
+      "title": "I don't think we should limit the spec to one app per platform",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/10",
+      "state": "OPEN",
+      "author": "gffletch",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'd like to discuss why we don't want to recommend supporting the spec for multiple first party apps?\r\n\r\nMy thinking has been the protocol (whether in or out of scope) allows for a challenge/response method that the AS can control allowing it to support multiple apps at the same time. On the App side, this can be managed via an SDK that is used by all the first party apps.\r\n\r\nThe AS needs to track which app versions have which capabilities to ensure the correct native experience is supported and if it's not possible to support the native experience then the AS asks the client to fall back to the web redirect experience.\r\n",
+      "createdAt": "2023-05-16T12:26:49Z",
+      "updatedAt": "2023-05-19T15:27:36Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "gffletch",
+          "authorAssociation": "NONE",
+          "body": "Key point is that we don't want different user experiences implemented by the different apps. Add this topic in the Security Considerations section.",
+          "createdAt": "2023-05-19T15:26:44Z",
+          "updatedAt": "2023-05-19T15:26:44Z"
+        },
+        {
+          "author": "gffletch",
+          "authorAssociation": "NONE",
+          "body": "Also, if there are multiple 1st apps, can use OIDF Native SSO for Mobile Apps to create a better experience for the user",
+          "createdAt": "2023-05-19T15:27:36Z",
+          "updatedAt": "2023-05-19T15:27:36Z"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOJbxyLc5mCe_a",
+      "title": "Always require PKCE due to possibility of fallback to web redirect flow",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/11",
+      "state": "OPEN",
+      "author": "gffletch",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I think we will want to require all native apps to implement PKCE at the native endpoint even though it's not really needed for full native experiences. However, if the AS determines the client needs to fallback to the web based redirect flow, it would be good if all the PKCE parameters are in place for the authorization. The fallback is really a continuation of the current authorization (not a new one) and hence it would be good for the AS to provide a redirect URI that continues the authentication \"session\" and hence the final call for tokens needs to be protected by PKCE.",
+      "createdAt": "2023-05-16T12:29:19Z",
+      "updatedAt": "2023-05-19T15:12:50Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "PieterKas",
+          "authorAssociation": "NONE",
+          "body": "Do we need the same for DPoP if you need Authorization Code binding capabilities (may need that even if you don't go to web).",
+          "createdAt": "2023-05-19T15:12:50Z",
+          "updatedAt": "2023-05-19T15:12:50Z"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOJbxyLc5mCiY2",
+      "title": "Is (e.g. password) the best choice in the Protocol Overview section",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/12",
+      "state": "OPEN",
+      "author": "gffletch",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'd rather we not use 'password' as an example of additional data the client can post to the AS as part of the authorization challenge endpoint. I really think this endpoint should mirror the /authorization endpoint with the purpose of supporting native authentication flows. Adding additional data in this POST seems like it adds to the complexity for Authorization Servers to implement which may limit adoption.\r\n\r\nWe could use 'username' as an example as it can be passed in the \"login_hint\" parameter (at least in OIDC). I don't see any harm in the first response of the AS as an error asking for additional information. For example, the first response may be a passkey challenge as the user doesn't even have a password.",
+      "createdAt": "2023-05-16T12:37:49Z",
+      "updatedAt": "2023-05-16T12:37:49Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOJbxyLc5mCj22",
+      "title": "Authorization Challenge Request",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/13",
+      "state": "OPEN",
+      "author": "gffletch",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I think we should explicitly state that this end point supports all parameters and extensions as supported by the /authorization endpoint. The difference of this endpoint is that it returns errors with instructions on what the next step the client needs to take vs managing all that challenge/response flow in a web page.",
+      "createdAt": "2023-05-16T12:41:38Z",
+      "updatedAt": "2023-05-19T15:29:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "We might be able to look at PAR for language to use here, since PAR does the same thing.",
+          "createdAt": "2023-05-19T15:29:31Z",
+          "updatedAt": "2023-05-19T15:29:31Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOJbxyLc5mCm1W",
+      "title": "Need a non-normative example showing how the AS extends the spec to make it all work",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/14",
+      "state": "OPEN",
+      "author": "gffletch",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I think we will need more clarity on how an AS can leverage this spec to produce a fully working flow. There are statements like... \"the AS MAY define additional parameters\" but the reality is the AS MUST define additional parameters to make a concrete flow work. In that sense I think we need to make that more clear.",
+      "createdAt": "2023-05-16T12:49:07Z",
+      "updatedAt": "2023-05-19T15:12:44Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "We can add an appendix section describing how an AS could build a concrete implementation of this. Could reference the appendix from the main part of the spec as an example of how this could look.\r\n\r\nIn any case, we want to make sure it's clear that this is not the \"default\" implementation we expect, so doing it as an appendix will avoid that confusion.",
+          "createdAt": "2023-05-19T15:12:44Z",
+          "updatedAt": "2023-05-19T15:12:44Z"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOJbxyLc5mXcq4",
+      "title": "Include non-normative examples in the Appendix",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/15",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "e.g. use of login identifier (such as e-mail), that theAS can then use to do realm discovery (find the right IdP).",
+      "createdAt": "2023-05-19T15:18:23Z",
+      "updatedAt": "2023-05-19T15:18:23Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 4,
+      "id": "PR_kwDOJbxyLc5P32Vy",
+      "title": "Added a figure to reflect the protocol description",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/pull/4",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Added a figure outlining the back and forth between the native client and the authorization server.",
+      "createdAt": "2023-05-05T15:15:42Z",
+      "updatedAt": "2023-05-05T15:15:43Z",
+      "baseRepository": "aaronpk/oauth-first-party-native-apps",
+      "baseRefName": "main",
+      "baseRefOid": "731807ba4d220e1bf7c8bbeba1c1e1432d534f01",
+      "headRepository": "PieterKas/oauth-first-party-native-apps",
+      "headRefName": "patch-1",
+      "headRefOid": "0a28be71ebdd9840e0fd11a95b9497f4aa607800",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
