@@ -20,24 +20,24 @@ and the client, as there typically is for first-party applications.
 It should only be considered when there are usability
 concerns with a redirect-based approach, such as for native mobile or desktop applications. 
     " name="description">
-<meta content="xml2rfc 3.17.1" name="generator">
+<meta content="xml2rfc 3.17.3" name="generator">
 <meta content="next generation" name="keyword">
 <meta content="unicorn" name="keyword">
 <meta content="sparkling distributed ledger" name="keyword">
 <meta content="draft-parecki-oauth-first-party-native-apps-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.17.1
-    Python 3.10.11
+  xml2rfc 3.17.3
+    Python 3.11.3
     appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
+    google-i18n-address 3.0.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.2
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 65.6.0
+    requests 2.31.0
+    setuptools 67.7.2
     six 1.16.0
     wcwidth 0.2.6
 -->
@@ -621,6 +621,7 @@ sub, sup {
   clear: left;
   float: left;
   text-align: right;
+  margin-right: 1ch;
 }
 #identifiers dd {
   margin: 0;
@@ -672,7 +673,8 @@ sub, sup {
 .references dt {
   text-align: right;
   font-weight: bold;
-  min-width: 7em;
+  min-width: 10ch;
+  margin-right: 1.5ch;
 }
 .references dt:target::before {
   content: "⇒";
@@ -680,7 +682,7 @@ sub, sup {
   margin: 0 10px 0 -25px;
 }
 .references dd {
-  margin-left: 8em !important;
+  margin-left: 12ch !important;
   overflow: auto;
 }
 
@@ -1058,11 +1060,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OAuth for First-Party Native Apps</td>
-<td class="right">April 2023</td>
+<td class="right">June 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Parecki, et al.</td>
-<td class="center">Expires 30 October 2023</td>
+<td class="center">Expires 11 December 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1075,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-parecki-oauth-first-party-native-apps-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-04-28" class="published">28 April 2023</time>
+<time datetime="2023-06-09" class="published">9 June 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-10-30">30 October 2023</time></dd>
+<dd class="expires"><time datetime="2023-12-11">11 December 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1147,7 +1149,7 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 October 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 December 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1256,6 +1258,17 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
                 <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-proof-of-possession" class="internal xref">Proof of Possession</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.1">
+                    <p id="section-toc.1-1.8.2.4.2.1.1"><a href="#section-8.4.1" class="auto internal xref">8.4.1</a>.  <a href="#name-dpop" class="internal xref">DPoP</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.2">
+                    <p id="section-toc.1-1.8.2.4.2.2.1"><a href="#section-8.4.2" class="auto internal xref">8.4.2</a>.  <a href="#name-other-proof-of-possession-m" class="internal xref">Other Proof of Possession Mechanisms</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
+                <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.  <a href="#name-multiple-applications" class="internal xref">Multiple Applications</a></p>
 </li>
             </ul>
 </li>
@@ -1263,7 +1276,15 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
@@ -1294,12 +1315,9 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
           <li class="normal" id="section-1.1-2.2">
             <span class="bcp14">MUST NOT</span> be used by third party applications, <span class="bcp14">SHOULD</span> take measures to prevent use by third party applications. (e.g. only enable for certain client IDs, and take measures to authenticate your apps.)<a href="#section-1.1-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-1.1-2.3">Designed for native applications, both mobile and desktop applications.<a href="#section-1.1-2.3" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-1.1-2.4">
-            <span class="bcp14">SHOULD</span> only use this specification if there is only one native application (per platform) for the service. If there are multiple applications, then a traditional redirect-based authorization code flow <span class="bcp14">SHOULD</span> be used instead.<a href="#section-1.1-2.4" class="pilcrow">¶</a>
-</li>
         </ul>
+<p id="section-1.1-3">This specification is designed to be used by native applications, which includes both mobile and desktop applications.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">If you have multiple apps, there may be better ways of sharing a user's login between the apps other than each app implementing this specification or using an SDK that implements this specification. For example, [[Native SSO]] provides a mechanism for one app to obtain new tokens by exchanging tokens from another app, without any user interaction. See <a href="#multiple-applications" class="auto internal xref">Section 8.5</a> for more details.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limitations-of-this-specification">
@@ -1348,25 +1366,75 @@ and "Token Endpoint" defined by <span>[<a href="#RFC6749" class="cite xref">RFC6
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-protocol-overview" class="section-name selfRef">Protocol Overview</a>
       </h2>
 <p id="section-3-1">Three entry points into the draft:<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">From scratch:<a href="#section-3-2" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3-3">
-<li id="section-3-3.1">The client initiates the authorization by making a POST request to the authorization challenge endpoint, potentially with information collected from the user (e.g. password)<a href="#section-3-3.1" class="pilcrow">¶</a>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-3-2">
+<pre>
+                                                +-------------------+
+                                                |   Authorization   |
+                          (B)Authorization      |      Server       |
+             +----------+    Challenge Request  |+-----------------+|
+(A)Client+---|  Native  |----------------------&gt;||  Authorization  ||
+   Starts|   |  Client  |                       ||   Challenge     ||
+   Flow  +--&gt;|          |&lt;----------------------||    Endpoint     ||
+             |          | (C)Authorization      ||                 ||
+             |          |    Error Response     ||                 ||
+             |          |         :             ||                 ||
+             |          |         :             ||                 ||
+             |          | (D)Authorization      ||                 ||
+             |          |    Challenge Request  ||                 ||
+             |          |----------------------&gt;||                 ||
+             |          |                       ||                 ||
+             |          |&lt;----------------------||                 ||
+             |          | (E) Authorization     |+-----------------+|
+             |          |     Code Response     |                   |
+             |          |                       |                   |
+             |          |                       |                   |
+             |          |                       |                   |
+             |          | (F) Authorization     |                   |
+             |          |     Grant             |+-----------------+|
+             |          |----------------------&gt;||      Token      ||
+             |          |                       ||     Endpoint    ||
+             |          |&lt;----------------------||                 ||
+             |          | (G) Access Token      |+-----------------+|
+             |          |                       |                   |
+             +----------+                       +-------------------+
+</pre><a href="#section-3-2" class="pilcrow">¶</a>
+</div>
+<p id="section-3-3">Figure: Native Client Authorization Code Request<a href="#section-3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-4.1">(A) The native client collects information from the user.<a href="#section-3-4.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-3-3.2">The authorization server determines whether the information provided to the authorization initiation endpoint is sufficient to grant authorization, and either responds with an authorization code or responds with an error<a href="#section-3-3.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.2">(B) The client initiates the authorization by making a POST request to the authorization challenge endpoint, potentially with information collected from the user (e.g. password)<a href="#section-3-4.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-3-3.3">The client continues to collect information from the user and send it to the authorization challenge endpoint until it receives an authorization code<a href="#section-3-3.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.3">(C) The authorization server determines whether the information provided to the Authorization Challenge Endpoint is sufficient to grant authorization, and either responds with an authorization code or responds with an error. In this example, it determines that additional information is needed and responds with an error. The error may contain additional information to guide the Client on what information to collect next. This pattern of collecting information, submitting it to the Authorization Challenge Endpoint and then receing an error or authroization code may repeat several times.<a href="#section-3-4.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-3-3.4">The client exchanges the authorization code for an access token at the token endpoint<a href="#section-3-3.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.4">(D) The client gathers additional information and POST a request to the authorization challenge endpoint.<a href="#section-3-4.4" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-3-4.5">(E) The authorization challenge endpoint returns a authorization code.<a href="#section-3-4.5" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-3-4.6">(F) The native client sends the authroizations code received in step (E) to obtain a token from the Token Endpoint.<a href="#section-3-4.6" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-3-4.7">(G) The Authroization Server returns an Access Token from the Token Endpoint.<a href="#section-3-4.7" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="section-3-5">From scratch:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3-6">
+<li id="section-3-6.1">The client initiates the authorization by making a POST request to the authorization challenge endpoint, potentially with information collected from the user (e.g. username or email)<a href="#section-3-6.1" class="pilcrow">¶</a>
+</li>
+        <li id="section-3-6.2">The authorization server determines the most appropriate authentication mechanism to use for the given user and returns an error saying what is required next (e.g. passkey, one-time code)<a href="#section-3-6.2" class="pilcrow">¶</a>
+</li>
+        <li id="section-3-6.3">The client continues to collect information from the user and send it to the authorization challenge endpoint until it receives an authorization code<a href="#section-3-6.3" class="pilcrow">¶</a>
+</li>
+        <li id="section-3-6.4">The client exchanges the authorization code for an access token at the token endpoint<a href="#section-3-6.4" class="pilcrow">¶</a>
 </li>
       </ol>
-<p id="section-3-4">When sending a refresh token to the token endpoint:<a href="#section-3-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3-5">
-<li id="section-3-5.1">When using a refresh token, the authorization server <span class="bcp14">MAY</span> respond with an error to indicate that re-authorization of the user is required<a href="#section-3-5.1" class="pilcrow">¶</a>
+<p id="section-3-7">When sending a refresh token to the token endpoint:<a href="#section-3-7" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3-8">
+<li id="section-3-8.1">When using a refresh token, the authorization server <span class="bcp14">MAY</span> respond with an error to indicate that re-authorization of the user is required<a href="#section-3-8.1" class="pilcrow">¶</a>
 </li>
       </ol>
-<p id="section-3-6">When using an access token at the resource server:<a href="#section-3-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3-7">
-<li id="section-3-7.1">When making a resource request to a resource server, the resource server <span class="bcp14">MAY</span> respond with an error according to OAuth 2.0 Step-Up Authentication Challenge Protocol<a href="#section-3-7.1" class="pilcrow">¶</a>
+<p id="section-3-9">When using an access token at the resource server:<a href="#section-3-9" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3-10">
+<li id="section-3-10.1">When making a resource request to a resource server, the resource server <span class="bcp14">MAY</span> respond with an error according to OAuth 2.0 Step-Up Authentication Challenge Protocol<a href="#section-3-10.1" class="pilcrow">¶</a>
 </li>
       </ol>
 </section>
@@ -1690,7 +1758,7 @@ Cache-Control: no-store
         <h3 id="name-client-authentication">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-client-authentication" class="section-name selfRef">Client Authentication</a>
         </h3>
-<p id="section-8.3-1">Typically, mobile and desktop applications are considered "public clients" in OAuth, since they cannot be shipped with a statically configured set of client credentials. Because of this, client impersonation should be a concern of anyone deploying this pattern. Without client authentication, a malicious user or attacker can mimick the requests the application makes to the authorization server, pretending to be the legitimate client.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">Typically, mobile and desktop applications are considered "public clients" in OAuth, since they cannot be shipped with a statically configured set of client credentials <span>[<a href="#RFC8252" class="cite xref">RFC8252</a>]</span>. Because of this, client impersonation should be a concern of anyone deploying this pattern. Without client authentication, a malicious user or attacker can mimick the requests the application makes to the authorization server, pretending to be the legitimate client.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.3-2">Because this specification is intended for first-party applications, it is likely that the intent is to also avoid prompting the user with a consent screen as recommended by <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>.<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <p id="section-8.3-3">Implementers <span class="bcp14">SHOULD</span> consider additional measures to limit the risk of client impersonation, such as using attestation APIs available from the operating system.<a href="#section-8.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -1704,7 +1772,41 @@ Cache-Control: no-store
 <ul class="normal">
 <li class="normal" id="section-8.4-2.1">PoP binding of device session parameter<a href="#section-8.4-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-8.4-2.2">The client <span class="bcp14">SHOULD</span> use DPoP for every request, the AS <span class="bcp14">SHOULD</span> bind any artifacts returned to the DPoP key<a href="#section-8.4-2.2" class="pilcrow">¶</a>
+        </ul>
+<div id="dpop">
+<section id="section-8.4.1">
+          <h4 id="name-dpop">
+<a href="#section-8.4.1" class="section-number selfRef">8.4.1. </a><a href="#name-dpop" class="section-name selfRef">DPoP</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-8.4.1-1.1">The client <span class="bcp14">SHOULD</span> use DPoP for every request, the AS <span class="bcp14">SHOULD</span> bind any artifacts returned to the DPoP key<a href="#section-8.4.1-1.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="other-proof-of-possession-mechanisms">
+<section id="section-8.4.2">
+          <h4 id="name-other-proof-of-possession-m">
+<a href="#section-8.4.2" class="section-number selfRef">8.4.2. </a><a href="#name-other-proof-of-possession-m" class="section-name selfRef">Other Proof of Possession Mechanisms</a>
+          </h4>
+<p id="section-8.4.2-1">Possible, but of scope of this document.<a href="#section-8.4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="multiple-applications">
+<section id="section-8.5">
+        <h3 id="name-multiple-applications">
+<a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-multiple-applications" class="section-name selfRef">Multiple Applications</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-8.5-1.1">Increased phishing risk<a href="#section-8.5-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-8.5-1.2">User confusion<a href="#section-8.5-1.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-8.5-1.3">Increased attack surface<a href="#section-8.5-1.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-8.5-1.4">Higher chance of incorrect implementations<a href="#section-8.5-1.4" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -1720,27 +1822,43 @@ Cache-Control: no-store
 </section>
 </div>
 <section id="section-10">
-      <h2 id="name-normative-references">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      <h2 id="name-references">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6749">[RFC6749]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6749">https://www.rfc-editor.org/rfc/rfc6749</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8259">[RFC8259]</dt>
-    <dd>
+      <dd>
 <span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
+</section>
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC8252">[RFC8252]</dt>
+      <dd>
+<span class="refAuthor">Denniss, W.</span> and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 for Native Apps"</span>, <span class="seriesInfo">BCP 212</span>, <span class="seriesInfo">RFC 8252</span>, <span class="seriesInfo">DOI 10.17487/RFC8252</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8252">https://www.rfc-editor.org/rfc/rfc8252</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
 </section>
 <div id="acknowledgments">
 <section id="appendix-A">
