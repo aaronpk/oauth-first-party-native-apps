@@ -5,10 +5,10 @@
 Web Authorization Protocol                                    A. Parecki
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             G. Fletcher
-Expires: 11 December 2023                          Capital One Financial
+Expires: 18 December 2023                          Capital One Financial
                                                             P. Kasselman
                                                                Microsoft
-                                                             9 June 2023
+                                                            16 June 2023
 
 
              OAuth 2.0 for First-Party Native Applications
@@ -17,9 +17,9 @@ Expires: 11 December 2023                          Capital One Financial
 Abstract
 
    This document extends the OAuth 2.0 Authorization Framework [RFC6749]
-   with new grant types to support first-party native applications that
-   want to control the user experience of the process of obtaining
-   authorization from the user.
+   with a new endpoint authorization_challenge_endpoint to support
+   first-party native applications that want to control the process of
+   obtaining authorization from the user using a native experience.
 
    In many cases, this can provide an entirely browserless experience
    suited for native applications, only delegating to the browser in
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 December 2023.
+   This Internet-Draft will expire on 18 December 2023.
 
 Copyright Notice
 
@@ -103,18 +103,22 @@ Table of Contents
    6.  Token Request
      6.1.  Token Endpoint Error Response
    7.  Resource Server Error Response
-   8.  Security Considerations
-     8.1.  First-Party Applications
-     8.2.  Phishing
-     8.3.  Client Authentication
-     8.4.  Proof of Possession
-       8.4.1.  DPoP
-       8.4.2.  Other Proof of Possession Mechanisms
-     8.5.  Multiple Applications
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   8.  Authorization Server Metadata
+   9.  Security Considerations
+     9.1.  First-Party Applications
+     9.2.  Phishing
+     9.3.  Client Authentication
+     9.4.  Proof of Possession
+       9.4.1.  DPoP
+       9.4.2.  Other Proof of Possession Mechanisms
+     9.5.  Multiple Applications
+       9.5.1.  Experience Risk
+       9.5.2.  Technical Risk
+       9.5.3.  Mitigation
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -144,20 +148,14 @@ Table of Contents
    specification or using an SDK that implements this specification.
    For example, [[Native SSO]] provides a mechanism for one app to
    obtain new tokens by exchanging tokens from another app, without any
-   user interaction.  See Section 8.5 for more details.
+   user interaction.  See Section 9.5 for more details.
 
 1.2.  Limitations of this specification
 
-   TODO
-
-   *  If the service provides multiple applications, then it creates an
-      additional burden to build and maintain native login flows within
-      each application.  Instead, the redirect-based authorization code
-      flow removes the burden of implementing login flows from each
-      application by centralizing all aspects of logging in at the
-      authorization server.
-
-   *  See Section 8.2 section below.
+   It's important to remember that the scope of this specification is
+   limited to 1st party native applications.  Please review the entirety
+   of Section 9 and when more than one 1st party native application is
+   supported, Section 9.5.
 
 2.  Conventions and Definitions
 
@@ -279,6 +277,23 @@ Table of Contents
    The authorization challenge endpoint is a new endpoint defined by
    this specification which the native application uses to obtain an
    authorization code.
+
+   Authorization servers supporting this specification SHOULD include
+   the URL of their authorization challenge endpoint in their
+   authorization server metadata document [RFC8414] using the
+   authorization_challenge_request_endpoint parameter as defined in
+   Section 8.
+
+   The endpoint accepts the authorization request parameters defined in
+   [RFC6749] for the authorization endpoint as well as all applicable
+   extensions defined for the authorization endpoint.  Some examples of
+   such extensions include Proof Key for Code Exchange (PKCE) [RFC7636],
+   Resource Indicators [RFC8707], and OpenID Connect (OIDC) [OIDC].  It
+   is important to note that some extension parameters have meaning in a
+   web context but don't have meaning in a native mechanism (e.g.
+   response_mode=query).  It is out of scope as to what the AS does in
+   the case that an extension defines a parameter that is has no meaning
+   in this use case.
 
    The client initiates the authorization flow with or without
    information collected from the user (e.g. a password or MFA code).
@@ -504,9 +519,15 @@ Table of Contents
    (No new things need to be defined by this specification in order to
    use this.)
 
-8.  Security Considerations
+8.  Authorization Server Metadata
 
-8.1.  First-Party Applications
+   The following authorization server metadata parameters [RFC8414] are
+   introduced to signal the server's capability and policy with respect
+   to 1st Party Native Applications.
+
+9.  Security Considerations
+
+9.1.  First-Party Applications
 
    Because this specification enables a client application to interact
    directly with the end user, and the application handles sending any
@@ -518,7 +539,7 @@ Table of Contents
    belonging to the same brand as the authorization server.  For
    example, a bank publishing their own mobile application.
 
-8.2.  Phishing
+9.2.  Phishing
 
    There are two ways using this specification increases the risk of
    phishing.
@@ -542,7 +563,7 @@ Table of Contents
    require that the user go through a redirect-based flow at any stage
    of the process based on its own risk assessment.
 
-8.3.  Client Authentication
+9.3.  Client Authentication
 
    Typically, mobile and desktop applications are considered "public
    clients" in OAuth, since they cannot be shipped with a statically
@@ -560,7 +581,7 @@ Table of Contents
    client impersonation, such as using attestation APIs available from
    the operating system.
 
-8.4.  Proof of Possession
+9.4.  Proof of Possession
 
    TODO: Describe how to add proof of possession into the various parts
    of this flow.  Describe why, because things like device session could
@@ -568,32 +589,60 @@ Table of Contents
 
    *  PoP binding of device session parameter
 
-8.4.1.  DPoP
+9.4.1.  DPoP
 
    *  The client SHOULD use DPoP for every request, the AS SHOULD bind
       any artifacts returned to the DPoP key
 
-8.4.2.  Other Proof of Possession Mechanisms
+9.4.2.  Other Proof of Possession Mechanisms
 
    Possible, but of scope of this document.
 
-8.5.  Multiple Applications
+9.5.  Multiple Applications
 
-   *  Increased phishing risk
+   When there there is more than one 1st-party native applications
+   supported by the AS, then it is important to consider a number of
+   additional risks.  These risks fall into two main categories:
+   Experience Risk and Technical Risk which are described below.
 
-   *  User confusion
+9.5.1.  Experience Risk
 
-   *  Increased attack surface
+   Any time a user is asked to provide the authentication credentials in
+   user experiences that differ, it has the effect of increasing the
+   likelihood that the user will fall prey to a phishing attack because
+   they are used to entering credentials in different looking
+   experiences.  When multiple native applications are support, the
+   implementation MUST ensure the native experience is identical across
+   all the 1st party native applications.
 
-   *  Higher chance of incorrect implementations
+   Another experience risk is user confusion caused by different looking
+   experiences and behaviors.  This can increase the likelihood the user
+   will not complete the authentication experience for the 1st party
+   native application.
 
-9.  IANA Considerations
+9.5.2.  Technical Risk
+
+   In addition to the experience risks, multiple implementations in 1st
+   party native applications increases the risk of an incorrect
+   implementation as well as increasing the attack surface as each
+   implementation may expose it's own weaknesses.
+
+9.5.3.  Mitigation
+
+   To address these risk, when multiple 1st party native applications
+   must be supported, and other methods such as [Native SSO] are not
+   applicable, it is RECOMMENDED that a client-side SDK be used to
+   ensure the implementation is consistent across the different native
+   apps and to ensure the user experience is identical for all 1st party
+   apps.
+
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -604,6 +653,15 @@ Table of Contents
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/rfc/rfc6749>.
 
+   [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
+              2014, <https://www.rfc-editor.org/rfc/rfc7159>.
+
+   [RFC7636]  Sakimura, N., Ed., Bradley, J., and N. Agarwal, "Proof Key
+              for Code Exchange by OAuth Public Clients", RFC 7636,
+              DOI 10.17487/RFC7636, September 2015,
+              <https://www.rfc-editor.org/rfc/rfc7636>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
@@ -613,7 +671,16 @@ Table of Contents
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/rfc/rfc8259>.
 
-10.2.  Informative References
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/rfc/rfc8414>.
+
+   [RFC8707]  Campbell, B., Bradley, J., and H. Tschofenig, "Resource
+              Indicators for OAuth 2.0", RFC 8707, DOI 10.17487/RFC8707,
+              February 2020, <https://www.rfc-editor.org/rfc/rfc8707>.
+
+11.2.  Informative References
 
    [RFC8252]  Denniss, W. and J. Bradley, "OAuth 2.0 for Native Apps",
               BCP 212, RFC 8252, DOI 10.17487/RFC8252, October 2017,
