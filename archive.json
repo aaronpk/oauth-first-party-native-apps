@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-06-11T01:46:40.790776+00:00",
+  "timestamp": "2023-06-18T01:45:29.278406+00:00",
   "repo": "aaronpk/oauth-first-party-native-apps",
   "labels": [
     {
@@ -79,15 +79,15 @@
       "id": "I_kwDOJbxyLc5lMjL3",
       "title": "Response Mode",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "What profiling would we need to make to ensure that the new endpoint accepts any parameter the authorization end-point. The goal is to allow layering and use of other OAuth capabilities. Do we borrow from PAR?",
       "createdAt": "2023-05-05T15:13:08Z",
-      "updatedAt": "2023-06-09T15:57:21Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-16T15:38:01Z",
+      "closedAt": "2023-06-16T15:38:01Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -103,15 +103,15 @@
       "id": "I_kwDOJbxyLc5lMjnX",
       "title": "OIDC compatibility",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Would we need a second profile to use this with OpenID Connect? How do we expect an AS that supports both OAuth and OIDC to implement this endpoint.\r\n\r\nAaron - make sure this is possible without breaking anything.\r\n\r\nGeorge - provide some guidance on what behaviour we want. Get AS behaviour consistent to simplify native implementations (no AS specific code needed). One idea - use examples from OIDC in a non-normative way.\r\n\r\nOmniAuth - maintains a list of providers their library supports. \r\n\r\nAaron- 2 classes of implementors. (1) proprietary (2) those using OIDC ",
       "createdAt": "2023-05-05T15:14:25Z",
-      "updatedAt": "2023-06-09T15:53:56Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-16T15:38:14Z",
+      "closedAt": "2023-06-16T15:38:14Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -206,7 +206,7 @@
       "id": "I_kwDOJbxyLc5lMsaZ",
       "title": "How to layer DPoP on top of this flow",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -215,8 +215,8 @@
       "labels": [],
       "body": "Explore if anything is needed to support DPoP",
       "createdAt": "2023-05-05T15:42:14Z",
-      "updatedAt": "2023-06-09T16:02:01Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-16T15:38:48Z",
+      "closedAt": "2023-06-16T15:38:48Z",
       "comments": []
     },
     {
@@ -240,28 +240,28 @@
       "id": "I_kwDOJbxyLc5mCeB6",
       "title": "I don't think we should limit the spec to one app per platform",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gffletch",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "gffletch"
       ],
       "labels": [],
       "body": "I'd like to discuss why we don't want to recommend supporting the spec for multiple first party apps?\r\n\r\nMy thinking has been the protocol (whether in or out of scope) allows for a challenge/response method that the AS can control allowing it to support multiple apps at the same time. On the App side, this can be managed via an SDK that is used by all the first party apps.\r\n\r\nThe AS needs to track which app versions have which capabilities to ensure the correct native experience is supported and if it's not possible to support the native experience then the AS asks the client to fall back to the web redirect experience.\r\n",
       "createdAt": "2023-05-16T12:26:49Z",
-      "updatedAt": "2023-06-09T16:01:16Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-16T15:38:45Z",
+      "closedAt": "2023-06-16T15:38:45Z",
       "comments": [
         {
           "author": "gffletch",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Key point is that we don't want different user experiences implemented by the different apps. Add this topic in the Security Considerations section.",
           "createdAt": "2023-05-19T15:26:44Z",
           "updatedAt": "2023-05-19T15:26:44Z"
         },
         {
           "author": "gffletch",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Also, if there are multiple 1st apps, can use OIDF Native SSO for Mobile Apps to create a better experience for the user",
           "createdAt": "2023-05-19T15:27:36Z",
           "updatedAt": "2023-05-19T15:27:36Z"
@@ -473,6 +473,190 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOJbxyLc5TMjde",
+      "title": "Security Considerations: How to use DPoP for Native Apps",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/pull/18",
+      "state": "MERGED",
+      "author": "PieterKas",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Described how to use DPoP as part of the security considerations.",
+      "createdAt": "2023-06-16T14:13:04Z",
+      "updatedAt": "2023-06-16T15:36:29Z",
+      "baseRepository": "aaronpk/oauth-first-party-native-apps",
+      "baseRefName": "main",
+      "baseRefOid": "aa2d1575e60c04d11fb1f3d7101d59e91320ba03",
+      "headRepository": "PieterKas/oauth-first-party-native-apps",
+      "headRefName": "patch-2",
+      "headRefOid": "00abd046899ba782d4f9bfa483a773c1b20c35a9",
+      "closedAt": "2023-06-16T15:36:28Z",
+      "mergedAt": "2023-06-16T15:36:28Z",
+      "mergedBy": "aaronpk",
+      "mergeCommit": {
+        "oid": "1d4d3d9ad9fb220bad318ff4cc317c4deece3e89"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJbxyLc5YcKi1",
+          "commit": {
+            "abbreviatedOid": "a63a5cf"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-16T15:35:52Z",
+          "updatedAt": "2023-06-16T15:35:53Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\nDPoP includes an optional capability to bind the authorization code to the DPoP key to enable end-to-end binding of the entire authorization flow. If an attacker can access the Authorization Code and PKCE code verifier as described in Section 11.9 of {{DPOP}}, Authorization Code binding SHOULD be used.\r\n\r\nTo bind the authorization code using the Authorization Challenge Endpoint, the JWK Thumbprint of the DPoP key MUST be communicated to the Authorization Server by including the `dpop_jkt` parameter defined in section 10 of {{DPoP}} alongside other authorization request parameters in the POST body of the first Authorization Challenge Request. If it is included in subsequent Authorization Challenge Requests, the value of this parameter must be the same as in the initial request. If the JWK Thumbprint in the `dpop_jkt` differ at any point, the Authorization Server MUST reject the request. If the `dpop_jkt` parameter is not included in the first request, but added in subsequent requests, the Authorization Server MUST reject the request (do we need to define a specific error code for that?).\r\n```",
+              "createdAt": "2023-06-16T15:35:53Z",
+              "updatedAt": "2023-06-16T15:35:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJbxyLc5YcKu0",
+          "commit": {
+            "abbreviatedOid": "00abd04"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-06-16T15:36:22Z",
+          "updatedAt": "2023-06-16T15:36:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOJbxyLc5TMxkW",
+      "title": "Addressing issues #2, #3 and #10.",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/pull/19",
+      "state": "MERGED",
+      "author": "gffletch",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-06-16T14:45:10Z",
+      "updatedAt": "2023-06-16T15:14:18Z",
+      "baseRepository": "aaronpk/oauth-first-party-native-apps",
+      "baseRefName": "main",
+      "baseRefOid": "aa2d1575e60c04d11fb1f3d7101d59e91320ba03",
+      "headRepository": "gffletch/oauth-first-party-native-apps",
+      "headRefName": "main",
+      "headRefOid": "f9fd2d42a22cf527f22ae1cf4aa39289d9f6d61a",
+      "closedAt": "2023-06-16T15:14:17Z",
+      "mergedAt": "2023-06-16T15:14:17Z",
+      "mergedBy": "aaronpk",
+      "mergeCommit": {
+        "oid": "1444b6ad4ceb9c35640e6ce1f7e69a95da9b5dd3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJbxyLc5Yb-O1",
+          "commit": {
+            "abbreviatedOid": "dc75a22"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-16T15:06:56Z",
+          "updatedAt": "2023-06-16T15:06:56Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\r\nAuthorization servers supporting this specification SHOULD include the URL of their authorization challenge endpoint in their authorization server metadata document {{RFC8414}} using the `authorization_challenge_request_endpoint` parameter as defined in {{authorization-server-metadata}}.\r\n```",
+              "createdAt": "2023-06-16T15:06:56Z",
+              "updatedAt": "2023-06-16T15:06:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJbxyLc5Yb-T-",
+          "commit": {
+            "abbreviatedOid": "dc75a22"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-16T15:07:06Z",
+          "updatedAt": "2023-06-16T15:07:07Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "```suggestion\r\n# Authorization Server Metadata {#authorization-server-metadata}\r\n```",
+              "createdAt": "2023-06-16T15:07:07Z",
+              "updatedAt": "2023-06-16T15:07:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJbxyLc5Yb-2V",
+          "commit": {
+            "abbreviatedOid": "dc75a22"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-16T15:08:26Z",
+          "updatedAt": "2023-06-16T15:08:26Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\ndefines a parameter that is has no meaning in this use case.\r\n```",
+              "createdAt": "2023-06-16T15:08:26Z",
+              "updatedAt": "2023-06-16T15:08:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJbxyLc5YcBJ4",
+          "commit": {
+            "abbreviatedOid": "dc75a22"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-16T15:13:27Z",
+          "updatedAt": "2023-06-16T15:13:27Z",
+          "comments": [
+            {
+              "originalPosition": 77,
+              "body": "```suggestion\r\nAnother experience risk is user confusion caused by different looking experiences and behaviors. This can increase the likelihood the user will not complete the authentication experience for the 1st party native application.\r\n```",
+              "createdAt": "2023-06-16T15:13:27Z",
+              "updatedAt": "2023-06-16T15:13:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJbxyLc5YcBZV",
+          "commit": {
+            "abbreviatedOid": "f9fd2d4"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-06-16T15:14:04Z",
+          "updatedAt": "2023-06-16T15:14:04Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
