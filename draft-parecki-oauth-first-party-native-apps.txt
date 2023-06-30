@@ -150,7 +150,7 @@ Table of Contents
    If you have multiple apps, there may be better ways of sharing a
    user's login between the apps other than each app implementing this
    specification or using an SDK that implements this specification.
-   For example, [[Native SSO]] provides a mechanism for one app to
+   For example, [OpenID.Native-SSO] provides a mechanism for one app to
    obtain new tokens by exchanging tokens from another app, without any
    user interaction.  See Section 9.5 for more details.
 
@@ -289,8 +289,8 @@ Table of Contents
    [RFC6749] for the authorization endpoint as well as all applicable
    extensions defined for the authorization endpoint.  Some examples of
    such extensions include Proof Key for Code Exchange (PKCE) [RFC7636],
-   Resource Indicators [RFC8707], and OpenID Connect (OIDC) [OIDC].  It
-   is important to note that some extension parameters have meaning in a
+   Resource Indicators [RFC8707], and OpenID Connect [OpenID].  It is
+   important to note that some extension parameters have meaning in a
    web context but don't have meaning in a native mechanism (e.g.
    response_mode=query).  It is out of scope as to what the AS does in
    the case that an extension defines a parameter that is has no meaning
@@ -663,8 +663,8 @@ Table of Contents
 9.5.3.  Mitigation
 
    To address these risk, when multiple 1st party native applications
-   must be supported, and other methods such as [Native SSO] are not
-   applicable, it is RECOMMENDED that a client-side SDK be used to
+   must be supported, and other methods such as [OpenID.Native-SSO] are
+   not applicable, it is RECOMMENDED that a client-side SDK be used to
    ensure the implementation is consistent across the different native
    apps and to ensure the user experience is identical for all 1st party
    apps.
@@ -691,6 +691,15 @@ Table of Contents
               Internet-Draft, draft-ietf-oauth-step-up-authn-challenge-
               17, 26 June 2023, <https://datatracker.ietf.org/doc/html/
               draft-ietf-oauth-step-up-authn-challenge-17>.
+
+   [OpenID]   Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
+              C. Mortimore, "OpenID Connect Core 1.0", November 2014,
+              <https://openid.net/specs/openid-connect-core-1_0.html>.
+
+   [OpenID.Native-SSO]
+              Fletcher, G., "OpenID Connect Native SSO for Mobile Apps",
+              November 2022, <https://openid.net/specs/openid-connect-
+              native-sso-1_0.html>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
