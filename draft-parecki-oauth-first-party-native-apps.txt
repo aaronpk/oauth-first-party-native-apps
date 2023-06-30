@@ -5,10 +5,10 @@
 Web Authorization Protocol                                    A. Parecki
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             G. Fletcher
-Expires: 18 December 2023                          Capital One Financial
+Expires: 1 January 2024                            Capital One Financial
                                                             P. Kasselman
                                                                Microsoft
-                                                            16 June 2023
+                                                            30 June 2023
 
 
              OAuth 2.0 for First-Party Native Applications
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2023.
+   This Internet-Draft will expire on 1 January 2024.
 
 Copyright Notice
 
@@ -91,6 +91,9 @@ Table of Contents
    2.  Conventions and Definitions
      2.1.  Terminology
    3.  Protocol Overview
+     3.1.  Initial Authorization Request
+     3.2.  Refresh Token Request
+     3.3.  Resource Request
    4.  Protocol Endpoints
      4.1.  Authorization challenge endpoint
      4.2.  Token endpoint
@@ -108,8 +111,8 @@ Table of Contents
      9.1.  First-Party Applications
      9.2.  Phishing
      9.3.  Client Authentication
-     9.4.  Proof of Possession
-       9.4.1.  DPoP
+     9.4.  Sender Constrained Tokens
+       9.4.1.  (Demonstrating Proof-of-Possession)
        9.4.2.  Other Proof of Possession Mechanisms
      9.5.  Multiple Applications
        9.5.1.  Experience Risk
@@ -178,7 +181,10 @@ Table of Contents
 
 3.  Protocol Overview
 
-   Three entry points into the draft:
+   There are three primary ways this specification extends various parts
+   of an OAuth system.
+
+3.1.  Initial Authorization Request
 
                                                    +-------------------+
                                                    |   Authorization   |
@@ -201,8 +207,8 @@ Table of Contents
                 |          |                       |                   |
                 |          |                       |                   |
                 |          |                       |                   |
-                |          | (F) Authorization     |                   |
-                |          |     Grant             |+-----------------+|
+                |          | (F) Token             |                   |
+                |          |     Request           |+-----------------+|
                 |          |---------------------->||      Token      ||
                 |          |                       ||     Endpoint    ||
                 |          |<----------------------||                 ||
@@ -212,11 +218,13 @@ Table of Contents
 
    Figure: Native Client Authorization Code Request
 
-   *  (A) The native client collects information from the user.
+   *  (A) The native client starts the flow, by presenting the user with
+      a "sign in" button, or collecting information from the user, such
+      as their email address or username.
 
-   *  (B) The client initiates the authorization by making a POST
-      request to the authorization challenge endpoint, potentially with
-      information collected from the user (e.g. password)
+   *  (B) The client initiates the authorization request by making a
+      POST request to the Authorization Challenge Endpoint, optionally
+      with information collected from the user (e.g. email or username)
 
    *  (C) The authorization server determines whether the information
       provided to the Authorization Challenge Endpoint is sufficient to
@@ -229,46 +237,31 @@ Table of Contents
       and then receing an error or authroization code may repeat several
       times.
 
-   *  (D) The client gathers additional information and POST a request
-      to the authorization challenge endpoint.
+   *  (D) The client gathers additional information (e.g. passkey, or
+      one-time code from email) and makes a POST request to the
+      Authorization Challenge Endpoint.
 
-   *  (E) The authorization challenge endpoint returns a authorization
+   *  (E) The Authorization Challenge Endpoint returns an authorization
       code.
 
-   *  (F) The native client sends the authroizations code received in
+   *  (F) The native client sends the authorization code received in
       step (E) to obtain a token from the Token Endpoint.
 
-   *  (G) The Authroization Server returns an Access Token from the
+   *  (G) The Authorization Server returns an Access Token from the
       Token Endpoint.
 
-   From scratch:
+3.2.  Refresh Token Request
 
-   1.  The client initiates the authorization by making a POST request
-       to the authorization challenge endpoint, potentially with
-       information collected from the user (e.g. username or email)
+   When the client uses a refresh token to obtain a new access token,
+   the authorization server MAY respond with an error to indicate that
+   re-authorization of the user is required.
 
-   2.  The authorization server determines the most appropriate
-       authentication mechanism to use for the given user and returns an
-       error saying what is required next (e.g. passkey, one-time code)
+3.3.  Resource Request
 
-   3.  The client continues to collect information from the user and
-       send it to the authorization challenge endpoint until it receives
-       an authorization code
-
-   4.  The client exchanges the authorization code for an access token
-       at the token endpoint
-
-   When sending a refresh token to the token endpoint:
-
-   1.  When using a refresh token, the authorization server MAY respond
-       with an error to indicate that re-authorization of the user is
-       required
-
-   When using an access token at the resource server:
-
-   1.  When making a resource request to a resource server, the resource
-       server MAY respond with an error according to OAuth 2.0 Step-Up
-       Authentication Challenge Protocol
+   When making a resource request to a resource server, the resource
+   server MAY respond with an error according to OAuth 2.0 Step-Up
+   Authentication Challenge Protocol, indicating that re-authorization
+   of the user is required.
 
 4.  Protocol Endpoints
 
@@ -277,6 +270,13 @@ Table of Contents
    The authorization challenge endpoint is a new endpoint defined by
    this specification which the native application uses to obtain an
    authorization code.
+
+   The authorization challenge endpoint is an HTTP API at the
+   authorization server that accepts HTTP POST requests with parameters
+   in the HTTP request message body using the application/x-www-form-
+   urlencoded format.  This format has a character encoding of UTF-8, as
+   described in Appendix B of [RFC6749].  The authorization challenge
+   endpoint URL MUST use the "https" scheme.
 
    Authorization servers supporting this specification SHOULD include
    the URL of their authorization challenge endpoint in their
@@ -296,7 +296,7 @@ Table of Contents
    in this use case.
 
    The client initiates the authorization flow with or without
-   information collected from the user (e.g. a password or MFA code).
+   information collected from the user (e.g. a passkey or MFA code).
 
    The authorization challenge endpoint response is either an
    authorization code or an error code, and may also contain a
@@ -325,9 +325,9 @@ Table of Contents
 5.1.  Authorization Challenge Request
 
    The client makes a request to the authorization challenge endpoint by
-   adding the following parameters using the `application/x-www-form-
-   urlencoded format with a character encoding of UTF-8 in the HTTP
-   request body:
+   adding the following parameters, as well as parameters from any
+   extensions, using the `application/x-www-form-urlencoded format with
+   a character encoding of UTF-8 in the HTTP request body:
 
    "client_id":  REQUIRED if the client is not authenticating with the
       authorization server.
@@ -581,22 +581,52 @@ Table of Contents
    client impersonation, such as using attestation APIs available from
    the operating system.
 
-9.4.  Proof of Possession
+9.4.  Sender Constrained Tokens
 
-   TODO: Describe how to add proof of possession into the various parts
-   of this flow.  Describe why, because things like device session could
-   otherwise be swapped in various types of attacks.
+   Tokens issued to native apps SHOULD be sender constrained to mitigate
+   the risk of token theft and replay.
 
-   *  PoP binding of device session parameter
+   Proof-of-Possession techniques constrain tokens by binding them to a
+   cryptographic key.  Whenever the token is presented, it should be
+   accompanied by a proof that the client presenting the token also
+   controls the cryptographic key bound to the token.  If a proof-of-
+   posession sender constrained token is presented without valid proof
+   of posession of the cryptographic key, it MUST be rejected.
 
-9.4.1.  DPoP
+9.4.1.  (Demonstrating Proof-of-Possession)
 
-   *  The client SHOULD use DPoP for every request, the AS SHOULD bind
-      any artifacts returned to the DPoP key
+   DPoP is an application-level mechanism for sender-constraining OAuth
+   [RFC6749] access and refresh tokens [I-D.ietf-oauth-dpop].  If DPoP
+   is used to sender constrain tokens, the native client SHOULD use DPoP
+   for every token request to the Authroization Server and interaction
+   with the Resource Server.
+
+   DPoP includes an optional capability to bind the authorization code
+   to the DPoP key to enable end-to-end binding of the entire
+   authorization flow.  If an attacker can access the Authorization Code
+   and PKCE code verifier as described in Section 11.9 of
+   [I-D.ietf-oauth-dpop], Authorization Code binding SHOULD be used.
+
+   To bind the authorization code using the Authorization Challenge
+   Endpoint, the JWK Thumbprint of the DPoP key MUST be communicated to
+   the Authorization Server by including the dpop_jkt parameter defined
+   in section 10 of [I-D.ietf-oauth-dpop] alongside other authorization
+   request parameters in the POST body of the first Authorization
+   Challenge Request.  If it is included in subsequent Authorization
+   Challenge Requests, the value of this parameter must be the same as
+   in the initial request.  If the JWK Thumbprint in the dpop_jkt differ
+   at any point, the Authorization Server MUST reject the request.  If
+   the dpop_jkt parameter is not included in the first request, but
+   added in subsequent requests, the Authorization Server MUST reject
+   the request (do we need to define a specific error code for that?).
 
 9.4.2.  Other Proof of Possession Mechanisms
 
-   Possible, but of scope of this document.
+   It may be possible to use other proof of posession mechanisms to
+   sender constrain access and refresh tokens.  Defining these
+   mechanisms are out of scope for this specification.
+
+   TODO: * PoP binding of device session parameter
 
 9.5.  Multiple Applications
 
@@ -643,6 +673,21 @@ Table of Contents
 11.  References
 
 11.1.  Normative References
+
+   [I-D.ietf-oauth-dpop]
+              Fett, D., Campbell, B., Bradley, J., Lodderstedt, T.,
+              Jones, M. B., and D. Waite, "OAuth 2.0 Demonstrating
+              Proof-of-Possession at the Application Layer (DPoP)", Work
+              in Progress, Internet-Draft, draft-ietf-oauth-dpop-16, 13
+              April 2023, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-oauth-dpop-16>.
+
+   [I-D.ietf-oauth-step-up-authn-challenge]
+              Bertocci, V. and B. Campbell, "OAuth 2.0 Step-up
+              Authentication Challenge Protocol", Work in Progress,
+              Internet-Draft, draft-ietf-oauth-step-up-authn-challenge-
+              17, 26 June 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-step-up-authn-challenge-17>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
