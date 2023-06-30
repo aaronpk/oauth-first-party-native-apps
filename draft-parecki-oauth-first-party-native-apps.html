@@ -1705,9 +1705,8 @@ depending on the implmentation.<a href="#section-5.2.2-4" class="pilcrow">¶</a>
       <h2 id="name-token-request">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-token-request" class="section-name selfRef">Token Request</a>
       </h2>
-<p id="section-6-1">The client makes a request to the token endpoint using the authorization code it obtained from the authorization challenge endpoint, according to Section 4.1.3 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">TODO: Would it be better to define our own grant type instead of overloading the authorization code grant type? Probably, since there won't be a redirect_uri.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">TODO: In any case, document the parameters here.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-1">The client makes a request to the token endpoint using the authorization code it obtained from the authorization challenge endpoint.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">This specification does not define any additional parameters beyond the token request parameters defined in  Section 4.1.3 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. However, notably the <code>redirect_uri</code> parameter will not be included in this request, because no <code>redirect_uri</code> parameter was included in the authorization request.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="token-endpoint-error-response">
 <section id="section-6.1">
         <h3 id="name-token-endpoint-error-respon">
