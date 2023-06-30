@@ -16,23 +16,14 @@ Expires: 1 January 2024                            Capital One Financial
 
 Abstract
 
-   This document extends the OAuth 2.0 Authorization Framework [RFC6749]
-   with a new endpoint authorization_challenge_endpoint to support
-   first-party native applications that want to control the process of
-   obtaining authorization from the user using a native experience.
+   This document defines the Authorization Challenge Endpoint, which
+   supports a first-party native client that wants to control the
+   process of obtaining authorization from the user using a native
+   experience.
 
-   In many cases, this can provide an entirely browserless experience
-   suited for native applications, only delegating to the browser in
-   unexpected, high risk, or error conditions.
-
-   While a fully-delegated approach using the redirect-based
-   Authorization Code grant is generally preferred, this draft provides
-   a mechanism for the client to directly interact with the user.  This
-   requires a high degree of trust between the authorization server and
-   the client, as there typically is for first-party applications.  It
-   should only be considered when there are usability concerns with a
-   redirect-based approach, such as for native mobile or desktop
-   applications.
+   In many cases, this can provide an entirely browserless OAuth 2.0
+   experience suited for native applications, only delegating to the
+   browser in unexpected, high risk, or error conditions.
 
 About This Document
 
@@ -129,38 +120,81 @@ Table of Contents
 
 1.  Introduction
 
-   TODO: Key points to address include problem description, the
-   relationship to the step-up authentication spec (use of acr etc.),
-   properties of the protocol (extensibility etc).
+   This document extends the OAuth 2.0 Authorization Framework [RFC6749]
+   with a new endpoint, authorization_challenge_endpoint, to support
+   first-party native applications that want to control the process of
+   obtaining authorization from the user using a native experience.
+
+   The client collects any initial information from the user and POSTs
+   that information as well as information about the client's request to
+   the Authorization Challenge Endpoint, and receives either an
+   authorization code or an error code in response.  The error code may
+   indicate that the client can continue to prompt the user for more
+   information, or can indicate that the client needs to launch a
+   browser to have the user complete the flow in a browser.
+
+   The Authorization Challenge Endpoint is used to initiate the OAuth
+   flow in place of redirecting or launching a browser to the
+   authorization endpoint.
+
+   While a fully-delegated approach using the redirect-based
+   Authorization Code grant is generally preferred, this draft provides
+   a mechanism for the client to directly interact with the user.  This
+   requires a high degree of trust between the authorization server and
+   the client, as there typically is for first-party applications.  It
+   should only be considered when there are usability concerns with a
+   redirect-based approach, such as for native mobile or desktop
+   applications.
+
+   This draft also extends the token response (typically for use in
+   response to a refresh token request) and resource server response to
+   allow the authorization server or resource server to indicate that
+   the client should re-request authorization from the user.  This can
+   include requesting step-up authentication by including parameters
+   defined in [I-D.ietf-oauth-step-up-authn-challenge] as well.
 
 1.1.  Usage and Applicability
 
-   TODO: Prerequisites for using this specification
+   This specification MUST only be used by first-party applications,
+   which is when the authorization server and application are operated
+   by the same entity and the user understands them both as the same
+   entity.
 
-   *  MUST only be used by first-party applications, when the
-      authorization server and application are operated by the same
-      entity and the user understands them both as the same entity.
+   This specification MUST NOT be used by third party applications, and
+   the authorization server SHOULD take measures to prevent use by third
+   party applications. (e.g. only enable this grant for certain client
+   IDs, and take measures to authenticate first-party apps when
+   possible.)
 
-   *  MUST NOT be used by third party applications, SHOULD take measures
-      to prevent use by third party applications. (e.g. only enable for
-      certain client IDs, and take measures to authenticate your apps.)
+   Using this specification in scenarios other than those described will
+   lead to unintended security and privacy problems for users and
+   service providers.
 
    This specification is designed to be used by native applications,
    which includes both mobile and desktop applications.
 
-   If you have multiple apps, there may be better ways of sharing a
-   user's login between the apps other than each app implementing this
-   specification or using an SDK that implements this specification.
-   For example, [OpenID.Native-SSO] provides a mechanism for one app to
-   obtain new tokens by exchanging tokens from another app, without any
-   user interaction.  See Section 9.5 for more details.
+   If you provide multiple apps and expect users to use multiple apps on
+   the same device, there may be better ways of sharing a user's login
+   between the apps other than each app implementing this specification
+   or using an SDK that implements this specification.  For example,
+   [OpenID.Native-SSO] provides a mechanism for one app to obtain new
+   tokens by exchanging tokens from another app, without any user
+   interaction.  See Section 9.5 for more details.
 
 1.2.  Limitations of this specification
 
-   It's important to remember that the scope of this specification is
-   limited to 1st party native applications.  Please review the entirety
-   of Section 9 and when more than one 1st party native application is
-   supported, Section 9.5.
+   The scope of this specification is limited to first-party native
+   applications.  Please review the entirety of Section 9, and when more
+   than one first-party native application is supported, Section 9.5.
+
+   While this draft provides the framework for a native OAuth
+   experience, each implementation will need to define the specific
+   behavior that it expects from OAuth clients interacting with the
+   authorization server.  While this lack of clearly defining the
+   details would typically lead to less interoperability, it is
+   acceptable in this case since we intend this specification to be
+   deployed in a tightly coupled environment since it is only applicable
+   to first-party applications.
 
 2.  Conventions and Definitions
 
@@ -262,8 +296,9 @@ Table of Contents
 
    When making a resource request to a resource server, the resource
    server MAY respond with an error according to OAuth 2.0 Step-Up
-   Authentication Challenge Protocol, indicating that re-authorization
-   of the user is required.
+   Authentication Challenge Protocol
+   [I-D.ietf-oauth-step-up-authn-challenge], indicating that re-
+   authorization of the user is required.
 
 4.  Protocol Endpoints
 
@@ -416,9 +451,8 @@ Table of Contents
       Values for the error parameter MUST NOT include characters outside
       the set %x20-21 / %x23-5B / %x5D-7E.
 
-      TODO: The authorization server MAY extend these error codes with
-      custom messages based on the requirements of the authorization
-      server.
+      The authorization server MAY extend these error codes with custom
+      messages based on the requirements of the authorization server.
 
    "error_description":  OPTIONAL.  Human-readable ASCII [USASCII] text
       providing additional information, used to assist the client
@@ -485,17 +519,15 @@ Table of Contents
    error response as defined in Section 5.2 of OAuth 2.0 [RFC6749] where
    the error code is set to the following value:
 
-   (TODO: This value needs a better name)
+   "error": "authorization_required":  The authorization grant is
+      insufficiently authorized, but another access token request may
+      succeed if an additional authorization grant is presented.
 
-   "authorization_required":  The authorization grant is insufficiently
-      authorized, but another access token request may succeed if an
-      additional authorization grant is presented.
-
-   "device_session":  OPTIONAL.  The device session allows the
-      authorization server to associate subsequent requests by this
-      client with an ongoing authorization request sequence.  The client
-      MUST include the device_session in follow-up requests to the
-      challenge endpoint if it receives one along with the error
+   "device_session":  OPTIONAL.  The optional device session value
+      allows the authorization server to associate subsequent requests
+      by this client with an ongoing authorization request sequence.
+      The client MUST include the device_session in follow-up requests
+      to the challenge endpoint if it receives one along with the error
       response.
 
    For example:
@@ -511,21 +543,27 @@ Table of Contents
 
 7.  Resource Server Error Response
 
-   Step-Up Authentication defines a mechanism for resource servers to
-   tell the client to start a new authorization request, including
-   acr_values and max_age, and scope from RFC6750.  Upon receiving this
-   request, the client starts a new authorization request according to
-   this specification, and includes the acr_values, max_age and scope
-   returned in the error response.
+   Step-Up Authentication [I-D.ietf-oauth-step-up-authn-challenge]
+   defines a mechanism for resource servers to tell the client to start
+   a new authorization request, including acr_values and max_age, and
+   scope from RFC6750.  Upon receiving this request, the client starts a
+   new authorization request according to this specification, and
+   includes the acr_values, max_age and scope returned in the error
+   response.
 
-   (No new things need to be defined by this specification in order to
-   use this.)
+   This specification does not define any new parameters for the
+   resource server error response beyond those defined in
+   [I-D.ietf-oauth-step-up-authn-challenge].
 
 8.  Authorization Server Metadata
 
    The following authorization server metadata parameters [RFC8414] are
    introduced to signal the server's capability and policy with respect
    to 1st Party Native Applications.
+
+   "authorization_challenge_endpoint":  The URL of the authorization
+      challenge endpoint at which a client can initiate an authorization
+      request and eventually obtain an authorization code.
 
 9.  Security Considerations
 
@@ -672,7 +710,14 @@ Table of Contents
 
 10.  IANA Considerations
 
-   TBD
+   IANA has (TBD) registered the following values in the IANA "OAuth
+   Authorization Server Metadata" registry of [IANA.OAuth.Parameters]
+   established by [RFC8414].
+
+   *Metadata Name*: authorization_challenge_endpoint *Metadata
+   Description*: URL of the authorization server's authorization
+   challenge endpoint. *Change Controller*: IESG *Specification
+   Document*: Section 4.1 of [[ this specification ]]
 
 11.  References
 
@@ -692,6 +737,9 @@ Table of Contents
               Internet-Draft, draft-ietf-oauth-step-up-authn-challenge-
               17, 26 June 2023, <https://datatracker.ietf.org/doc/html/
               draft-ietf-oauth-step-up-authn-challenge-17>.
+
+   [IANA.OAuth.Parameters]
+              "*** BROKEN REFERENCE ***".
 
    [OpenID]   Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0", November 2014,
@@ -737,6 +785,10 @@ Table of Contents
    [RFC8707]  Campbell, B., Bradley, J., and H. Tschofenig, "Resource
               Indicators for OAuth 2.0", RFC 8707, DOI 10.17487/RFC8707,
               February 2020, <https://www.rfc-editor.org/rfc/rfc8707>.
+
+   [USASCII]  Institute, A. N. S., "Coded Character Set -- 7-bit
+              American Standard Code for Information Interchange, ANSI
+              X3.4", 1986.
 
 11.2.  Informative References
 

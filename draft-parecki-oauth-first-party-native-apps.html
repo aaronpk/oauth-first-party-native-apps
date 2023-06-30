@@ -9,18 +9,11 @@
 <meta content="George Fletcher" name="author">
 <meta content="Pieter Kasselman" name="author">
 <meta content="
-       This document extends the OAuth 2.0 Authorization Framework   with
-a new endpoint  authorization_challenge_endpoint  to support first-party native
-applications that want to control the process of obtaining authorization from
-the user using a native experience. 
-       In many cases, this can provide an entirely browserless experience suited for native
+       This document defines the Authorization Challenge Endpoint, which supports
+a first-party native client that wants to control the process of
+obtaining authorization from the user using a native experience. 
+       In many cases, this can provide an entirely browserless OAuth 2.0 experience suited for native
 applications, only delegating to the browser in unexpected, high risk, or error conditions. 
-       While a fully-delegated approach using the redirect-based Authorization Code grant is generally
-preferred, this draft provides a mechanism for the client to directly interact
-with the user. This requires a high degree of trust between the authorization server
-and the client, as there typically is for first-party applications.
-It should only be considered when there are usability
-concerns with a redirect-based approach, such as for native mobile or desktop applications. 
     " name="description">
 <meta content="xml2rfc 3.17.4" name="generator">
 <meta content="native apps" name="keyword">
@@ -1104,18 +1097,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">OAuth 2.0 for First-Party Native Applications</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document extends the OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> with
-a new endpoint <code>authorization_challenge_endpoint</code> to support first-party native
-applications that want to control the process of obtaining authorization from
-the user using a native experience.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">In many cases, this can provide an entirely browserless experience suited for native
+<p id="section-abstract-1">This document defines the Authorization Challenge Endpoint, which supports
+a first-party native client that wants to control the process of
+obtaining authorization from the user using a native experience.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">In many cases, this can provide an entirely browserless OAuth 2.0 experience suited for native
 applications, only delegating to the browser in unexpected, high risk, or error conditions.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">While a fully-delegated approach using the redirect-based Authorization Code grant is generally
-preferred, this draft provides a mechanism for the client to directly interact
-with the user. This requires a high degree of trust between the authorization server
-and the client, as there typically is for first-party applications.
-It should only be considered when there are usability
-concerns with a redirect-based approach, such as for native mobile or desktop applications.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1335,23 +1321,35 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO: Key points to address include problem description, the relationship to the step-up authentication spec (use of acr etc.), properties of the protocol (extensibility etc).<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document extends the OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> with
+a new endpoint, <code>authorization_challenge_endpoint</code>, to support first-party native
+applications that want to control the process of obtaining authorization from
+the user using a native experience.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The client collects any initial information from the user and POSTs that information
+as well as information about the client's request to the Authorization Challenge Endpoint,
+and receives either an authorization code or an error code in response. The error code
+may indicate that the client can continue to prompt the user for more information,
+or can indicate that the client needs to launch a browser to have the user complete
+the flow in a browser.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The Authorization Challenge Endpoint is used to initiate the OAuth flow in place of redirecting
+or launching a browser to the authorization endpoint.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">While a fully-delegated approach using the redirect-based Authorization Code grant is generally
+preferred, this draft provides a mechanism for the client to directly interact
+with the user. This requires a high degree of trust between the authorization server
+and the client, as there typically is for first-party applications.
+It should only be considered when there are usability
+concerns with a redirect-based approach, such as for native mobile or desktop applications.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">This draft also extends the token response (typically for use in response to a refresh token request) and resource server response to allow the authorization server or resource server to indicate that the client should re-request authorization from the user. This can include requesting step-up authentication by including parameters defined in <span>[<a href="#I-D.ietf-oauth-step-up-authn-challenge" class="cite xref">I-D.ietf-oauth-step-up-authn-challenge</a>]</span> as well.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <div id="usage-and-applicability">
 <section id="section-1.1">
         <h3 id="name-usage-and-applicability">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-usage-and-applicability" class="section-name selfRef">Usage and Applicability</a>
         </h3>
-<p id="section-1.1-1">TODO: Prerequisites for using this specification<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-1.1-2.1">
-            <span class="bcp14">MUST</span> only be used by first-party applications, when the authorization server and application are operated by the same entity and the user understands them both as the same entity.<a href="#section-1.1-2.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-1.1-2.2">
-            <span class="bcp14">MUST NOT</span> be used by third party applications, <span class="bcp14">SHOULD</span> take measures to prevent use by third party applications. (e.g. only enable for certain client IDs, and take measures to authenticate your apps.)<a href="#section-1.1-2.2" class="pilcrow">¶</a>
-</li>
-        </ul>
-<p id="section-1.1-3">This specification is designed to be used by native applications, which includes both mobile and desktop applications.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
-<p id="section-1.1-4">If you have multiple apps, there may be better ways of sharing a user's login between the apps other than each app implementing this specification or using an SDK that implements this specification. For example, <span>[<a href="#OpenID.Native-SSO" class="cite xref">OpenID.Native-SSO</a>]</span> provides a mechanism for one app to obtain new tokens by exchanging tokens from another app, without any user interaction. See <a href="#multiple-applications" class="auto internal xref">Section 9.5</a> for more details.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">This specification <span class="bcp14">MUST</span> only be used by first-party applications, which is when the authorization server and application are operated by the same entity and the user understands them both as the same entity.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">This specification <span class="bcp14">MUST NOT</span> be used by third party applications, and the authorization server <span class="bcp14">SHOULD</span> take measures to prevent use by third party applications. (e.g. only enable this grant for certain client IDs, and take measures to authenticate first-party apps when possible.)<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">Using this specification in scenarios other than those described will lead to unintended security and privacy problems for users and service providers.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">This specification is designed to be used by native applications, which includes both mobile and desktop applications.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">If you provide multiple apps and expect users to use multiple apps on the same device, there may be better ways of sharing a user's login between the apps other than each app implementing this specification or using an SDK that implements this specification. For example, <span>[<a href="#OpenID.Native-SSO" class="cite xref">OpenID.Native-SSO</a>]</span> provides a mechanism for one app to obtain new tokens by exchanging tokens from another app, without any user interaction. See <a href="#multiple-applications" class="auto internal xref">Section 9.5</a> for more details.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limitations-of-this-specification">
@@ -1359,7 +1357,9 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
         <h3 id="name-limitations-of-this-specifi">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-limitations-of-this-specifi" class="section-name selfRef">Limitations of this specification</a>
         </h3>
-<p id="section-1.2-1">It's important to remember that the scope of this specification is limited to 1st party native applications. Please review the entirety of <a href="#security-considerations" class="auto internal xref">Section 9</a> and when more than one 1st party native application is supported, <a href="#multiple-applications" class="auto internal xref">Section 9.5</a>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">The scope of this specification is limited to first-party native applications. Please review the entirety of <a href="#security-considerations" class="auto internal xref">Section 9</a>, and when more than one first-party native application is supported, <a href="#multiple-applications" class="auto internal xref">Section 9.5</a>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">While this draft provides the framework for a native OAuth experience, each implementation
+will need to define the specific behavior that it expects from OAuth clients interacting with the authorization server. While this lack of clearly defining the details would typically lead to less interoperability, it is acceptable in this case since we intend this specification to be deployed in a tightly coupled environment since it is only applicable to first-party applications.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1464,7 +1464,7 @@ and "Token Endpoint" defined by <span>[<a href="#RFC6749" class="cite xref">RFC6
         <h3 id="name-resource-request">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-resource-request" class="section-name selfRef">Resource Request</a>
         </h3>
-<p id="section-3.3-1">When making a resource request to a resource server, the resource server <span class="bcp14">MAY</span> respond with an error according to OAuth 2.0 Step-Up Authentication Challenge Protocol, indicating that re-authorization of the user is required.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">When making a resource request to a resource server, the resource server <span class="bcp14">MAY</span> respond with an error according to OAuth 2.0 Step-Up Authentication Challenge Protocol <span>[<a href="#I-D.ietf-oauth-step-up-authn-challenge" class="cite xref">I-D.ietf-oauth-step-up-authn-challenge</a>]</span>, indicating that re-authorization of the user is required.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1606,7 +1606,7 @@ parameters with the response:<a href="#section-5.2.2-1" class="pilcrow">¶</a></
 <span class="break"></span><dl class="dlParallel" id="section-5.2.2-2">
             <dt id="section-5.2.2-2.1">"error":</dt>
             <dd style="margin-left: 1.5em" id="section-5.2.2-2.2">
-              <p id="section-5.2.2-2.2.1"><span class="bcp14">REQUIRED</span>.  A single ASCII [USASCII] error code from the following:<a href="#section-5.2.2-2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.2-2.2.1"><span class="bcp14">REQUIRED</span>.  A single ASCII <span>[<a href="#USASCII" class="cite xref">USASCII</a>]</span> error code from the following:<a href="#section-5.2.2-2.2.1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-5.2.2-2.2.2">
                 <dt id="section-5.2.2-2.2.2.1">"invalid_request":</dt>
                 <dd style="margin-left: 1.5em" id="section-5.2.2-2.2.2.2">
@@ -1646,13 +1646,13 @@ exceeds the scope granted by the resource owner.<a href="#section-5.2.2-2.2.2.8.
 </dl>
 <p id="section-5.2.2-2.2.3">Values for the <code>error</code> parameter <span class="bcp14">MUST NOT</span> include characters
 outside the set %x20-21 / %x23-5B / %x5D-7E.<a href="#section-5.2.2-2.2.3" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-2.2.4">TODO: The authorization server <span class="bcp14">MAY</span> extend these error codes with custom
+<p id="section-5.2.2-2.2.4">The authorization server <span class="bcp14">MAY</span> extend these error codes with custom
 messages based on the requirements of the authorization server.<a href="#section-5.2.2-2.2.4" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-5.2.2-2.3">"error_description":</dt>
             <dd style="margin-left: 1.5em" id="section-5.2.2-2.4">
-              <p id="section-5.2.2-2.4.1"><span class="bcp14">OPTIONAL</span>.  Human-readable ASCII [USASCII] text providing
+              <p id="section-5.2.2-2.4.1"><span class="bcp14">OPTIONAL</span>.  Human-readable ASCII <span>[<a href="#USASCII" class="cite xref">USASCII</a>]</span> text providing
 additional information, used to assist the client developer in
 understanding the error that occurred.
 Values for the <code>error_description</code> parameter <span class="bcp14">MUST NOT</span> include
@@ -1720,27 +1720,26 @@ the authorization server can respond with an authorization challenge instead of 
 <p id="section-6.1-2">An authorization challenge error response is a particular type of
 error response as defined in Section 5.2 of OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> where
 the error code is set to the following value:<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">(TODO: This value needs a better name)<a href="#section-6.1-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-6.1-4">
-          <dt id="section-6.1-4.1">"authorization_required":</dt>
-          <dd style="margin-left: 1.5em" id="section-6.1-4.2">
-            <p id="section-6.1-4.2.1">The authorization grant is insufficiently authorized, but another
+<span class="break"></span><dl class="dlParallel" id="section-6.1-3">
+          <dt id="section-6.1-3.1">"error": "authorization_required":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-3.2">
+            <p id="section-6.1-3.2.1">The authorization grant is insufficiently authorized, but another
 access token request may succeed if an additional authorization
-grant is presented.<a href="#section-6.1-4.2.1" class="pilcrow">¶</a></p>
+grant is presented.<a href="#section-6.1-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-6.1-4.3">"device_session":</dt>
-          <dd style="margin-left: 1.5em" id="section-6.1-4.4">
-            <p id="section-6.1-4.4.1"><span class="bcp14">OPTIONAL</span>.  The device session allows the authorization server to
+<dt id="section-6.1-3.3">"device_session":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-3.4">
+            <p id="section-6.1-3.4.1"><span class="bcp14">OPTIONAL</span>.  The optional device session value allows the authorization server to
 associate subsequent requests by this client with an ongoing
 authorization request sequence. The client <span class="bcp14">MUST</span> include
 the <code>device_session</code> in follow-up requests to the challenge
-endpoint if it receives one along with the error response.<a href="#section-6.1-4.4.1" class="pilcrow">¶</a></p>
+endpoint if it receives one along with the error response.<a href="#section-6.1-3.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-6.1-5">For example:<a href="#section-6.1-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.1-6">
+<p id="section-6.1-4">For example:<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.1-5">
 <pre>
 HTTP/1.1 403 Forbidden
 Content-Type: application/json;charset=UTF-8
@@ -1750,7 +1749,7 @@ Cache-Control: no-store
   "error": "authorization_required",
   "device_session": "uY29tL2F1dGhlbnRpY"
 }
-</pre><a href="#section-6.1-6" class="pilcrow">¶</a>
+</pre><a href="#section-6.1-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1761,8 +1760,8 @@ Cache-Control: no-store
       <h2 id="name-resource-server-error-respo">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-resource-server-error-respo" class="section-name selfRef">Resource Server Error Response</a>
       </h2>
-<p id="section-7-1">Step-Up Authentication defines a mechanism for resource servers to tell the client to start a new authorization request, including <code>acr_values</code> and <code>max_age</code>, and <code>scope</code> from RFC6750. Upon receiving this request, the client starts a new authorization request according to this specification, and includes the <code>acr_values</code>, <code>max_age</code> and <code>scope</code> returned in the error response.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">(No new things need to be defined by this specification in order to use this.)<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-1">Step-Up Authentication <span>[<a href="#I-D.ietf-oauth-step-up-authn-challenge" class="cite xref">I-D.ietf-oauth-step-up-authn-challenge</a>]</span> defines a mechanism for resource servers to tell the client to start a new authorization request, including <code>acr_values</code> and <code>max_age</code>, and <code>scope</code> from RFC6750. Upon receiving this request, the client starts a new authorization request according to this specification, and includes the <code>acr_values</code>, <code>max_age</code> and <code>scope</code> returned in the error response.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">This specification does not define any new parameters for the resource server error response beyond those defined in <span>[<a href="#I-D.ietf-oauth-step-up-authn-challenge" class="cite xref">I-D.ietf-oauth-step-up-authn-challenge</a>]</span>.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authorization-server-metadata">
@@ -1771,6 +1770,14 @@ Cache-Control: no-store
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-authorization-server-metada" class="section-name selfRef">Authorization Server Metadata</a>
       </h2>
 <p id="section-8-1">The following authorization server metadata parameters <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span> are introduced to signal the server's capability and policy with respect to 1st Party Native Applications.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-8-2">
+        <dt id="section-8-2.1">"authorization_challenge_endpoint":</dt>
+        <dd style="margin-left: 1.5em" id="section-8-2.2">
+          <p id="section-8-2.2.1">The URL of the authorization challenge endpoint at which a client can initiate
+an authorization request and eventually obtain an authorization code.<a href="#section-8-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="security-considerations">
@@ -1886,7 +1893,11 @@ Cache-Control: no-store
       <h2 id="name-iana-considerations">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-10-1">TBD<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">IANA has (TBD) registered the following values in the IANA "OAuth Authorization Server Metadata" registry of <span>[<a href="#IANA.OAuth.Parameters" class="cite xref">IANA.OAuth.Parameters</a>]</span> established by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2"><strong>Metadata Name</strong>: authorization_challenge_endpoint
+<strong>Metadata Description</strong>: URL of the authorization server's authorization challenge endpoint.
+<strong>Change Controller</strong>: IESG
+<strong>Specification Document</strong>: Section 4.1 of [[ this specification ]]<a href="#section-10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-11">
@@ -1905,6 +1916,10 @@ Cache-Control: no-store
 <dt id="I-D.ietf-oauth-step-up-authn-challenge">[I-D.ietf-oauth-step-up-authn-challenge]</dt>
         <dd>
 <span class="refAuthor">Bertocci, V.</span> and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Step-up Authentication Challenge Protocol"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-step-up-authn-challenge-17</span>, <time datetime="2023-06-26" class="refDate">26 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-step-up-authn-challenge-17">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-step-up-authn-challenge-17</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.OAuth.Parameters">[IANA.OAuth.Parameters]</dt>
+        <dd>
+<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
 <dd class="break"></dd>
 <dt id="OpenID">[OpenID]</dt>
         <dd>
@@ -1943,8 +1958,12 @@ Cache-Control: no-store
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8414">https://www.rfc-editor.org/rfc/rfc8414</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8707">[RFC8707]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Resource Indicators for OAuth 2.0"</span>, <span class="seriesInfo">RFC 8707</span>, <span class="seriesInfo">DOI 10.17487/RFC8707</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8707">https://www.rfc-editor.org/rfc/rfc8707</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="USASCII">[USASCII]</dt>
+      <dd>
+<span class="refAuthor">Institute, A. N. S.</span>, <span class="refTitle">"Coded Character Set -- 7-bit American Standard Code for Information Interchange, ANSI X3.4"</span>, <time datetime="1986" class="refDate">1986</time>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
