@@ -112,7 +112,7 @@ Table of Contents
      9.2.  Phishing
      9.3.  Client Authentication
      9.4.  Sender Constrained Tokens
-       9.4.1.  (Demonstrating Proof-of-Possession)
+       9.4.1.  Demonstrating Proof-of-Possession
        9.4.2.  Other Proof of Possession Mechanisms
      9.5.  Multiple Applications
        9.5.1.  Experience Risk
@@ -593,7 +593,7 @@ Table of Contents
    posession sender constrained token is presented without valid proof
    of posession of the cryptographic key, it MUST be rejected.
 
-9.4.1.  (Demonstrating Proof-of-Possession)
+9.4.1.  Demonstrating Proof-of-Possession
 
    DPoP is an application-level mechanism for sender-constraining OAuth
    [RFC6749] access and refresh tokens [I-D.ietf-oauth-dpop].  If DPoP

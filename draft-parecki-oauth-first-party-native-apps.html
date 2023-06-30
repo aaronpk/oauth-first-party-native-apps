@@ -1278,7 +1278,7 @@ concerns with a redirect-based approach, such as for native mobile or desktop ap
                 <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.  <a href="#name-sender-constrained-tokens" class="internal xref">Sender Constrained Tokens</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.1">
-                    <p id="section-toc.1-1.9.2.4.2.1.1"><a href="#section-9.4.1" class="auto internal xref">9.4.1</a>.  <a href="#name-demonstrating-proof-of-poss" class="internal xref">(Demonstrating Proof-of-Possession)</a></p>
+                    <p id="section-toc.1-1.9.2.4.2.1.1"><a href="#section-9.4.1" class="auto internal xref">9.4.1</a>.  <a href="#name-demonstrating-proof-of-poss" class="internal xref">Demonstrating Proof-of-Possession</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.2">
                     <p id="section-toc.1-1.9.2.4.2.2.1"><a href="#section-9.4.2" class="auto internal xref">9.4.2</a>.  <a href="#name-other-proof-of-possession-m" class="internal xref">Other Proof of Possession Mechanisms</a></p>
@@ -1814,7 +1814,7 @@ Cache-Control: no-store
 <div id="demonstrating-proof-of-possession">
 <section id="section-9.4.1">
           <h4 id="name-demonstrating-proof-of-poss">
-<a href="#section-9.4.1" class="section-number selfRef">9.4.1. </a><a href="#name-demonstrating-proof-of-poss" class="section-name selfRef">(Demonstrating Proof-of-Possession)</a>
+<a href="#section-9.4.1" class="section-number selfRef">9.4.1. </a><a href="#name-demonstrating-proof-of-poss" class="section-name selfRef">Demonstrating Proof-of-Possession</a>
           </h4>
 <p id="section-9.4.1-1">DPoP is an application-level mechanism for sender-constraining OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> access and refresh tokens <span>[<a href="#I-D.ietf-oauth-dpop" class="cite xref">I-D.ietf-oauth-dpop</a>]</span>. If DPoP is used to sender constrain tokens, the native client <span class="bcp14">SHOULD</span> use DPoP for every token request to the Authroization Server and interaction with the Resource Server.<a href="#section-9.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.4.1-2">DPoP includes an optional capability to bind the authorization code to the DPoP key to enable end-to-end binding of the entire authorization flow. If an attacker can access the Authorization Code and PKCE code verifier as described in Section 11.9 of <span>[<a href="#I-D.ietf-oauth-dpop" class="cite xref">I-D.ietf-oauth-dpop</a>]</span>, Authorization Code binding <span class="bcp14">SHOULD</span> be used.<a href="#section-9.4.1-2" class="pilcrow">¶</a></p>
