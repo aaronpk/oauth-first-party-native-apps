@@ -114,6 +114,7 @@ Table of Contents
      9.4.  Sender Constrained Tokens
        9.4.1.  Demonstrating Proof-of-Possession
        9.4.2.  Other Proof of Possession Mechanisms
+       9.4.3.  Device Session
      9.5.  Multiple Applications
        9.5.1.  Experience Risk
        9.5.2.  Technical Risk
@@ -626,7 +627,9 @@ Table of Contents
    sender constrain access and refresh tokens.  Defining these
    mechanisms are out of scope for this specification.
 
-   TODO: * PoP binding of device session parameter
+9.4.3.  Device Session
+
+   *  PoP binding of device session parameter
 
 9.5.  Multiple Applications
 
@@ -668,7 +671,7 @@ Table of Contents
 
 10.  IANA Considerations
 
-   This document has no IANA actions.
+   TBD
 
 11.  References
 
