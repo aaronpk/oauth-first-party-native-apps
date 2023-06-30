@@ -123,6 +123,7 @@ Table of Contents
    11. References
      11.1.  Normative References
      11.2.  Informative References
+   Appendix A.  Examples
    Acknowledgments
    Authors' Addresses
 
@@ -742,6 +743,10 @@ Table of Contents
    [RFC8252]  Denniss, W. and J. Bradley, "OAuth 2.0 for Native Apps",
               BCP 212, RFC 8252, DOI 10.17487/RFC8252, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8252>.
+
+Appendix A.  Examples
+
+   TBD
 
 Acknowledgments
 
