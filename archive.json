@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-06-18T01:45:29.278406+00:00",
+  "timestamp": "2023-07-02T01:49:24.573676+00:00",
   "repo": "aaronpk/oauth-first-party-native-apps",
   "labels": [
     {
@@ -226,14 +226,22 @@
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/9",
       "state": "OPEN",
       "author": "gffletch",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The current draft lists the requirements as \"MUST NOT\" allow 3rd party clients to use this specification. Do we want to be that strong? Or leave it as is for now and change it later when there is more data and maybe implementation experience?",
       "createdAt": "2023-05-16T12:19:20Z",
-      "updatedAt": "2023-05-16T12:19:20Z",
+      "updatedAt": "2023-06-30T15:25:12Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "Pieter and I discussed this today, we are leaning towards sticking with the current limitation of 1st party apps, since mentioning 3rd party apps opens up a lot more items that would need to be solved in this context. If someone did want to create an extension to solve the 3rd party use cases that would be best done as a different draft.",
+          "createdAt": "2023-06-30T15:25:11Z",
+          "updatedAt": "2023-06-30T15:25:11Z"
+        }
+      ]
     },
     {
       "number": 10,
@@ -282,12 +290,12 @@
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/11",
       "state": "OPEN",
       "author": "gffletch",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I think we will want to require all native apps to implement PKCE at the native endpoint even though it's not really needed for full native experiences. However, if the AS determines the client needs to fallback to the web based redirect flow, it would be good if all the PKCE parameters are in place for the authorization. The fallback is really a continuation of the current authorization (not a new one) and hence it would be good for the AS to provide a redirect URI that continues the authentication \"session\" and hence the final call for tokens needs to be protected by PKCE.",
       "createdAt": "2023-05-16T12:29:19Z",
-      "updatedAt": "2023-06-09T15:43:40Z",
+      "updatedAt": "2023-06-30T15:25:28Z",
       "closedAt": null,
       "comments": [
         {
@@ -303,6 +311,13 @@
           "body": "If we go with PAR request URI option (#16) then we need the client to create the PKCE code challenge.\r\n\r\nThe DPoP question will be covered by the new DPoP section #8",
           "createdAt": "2023-06-09T15:31:17Z",
           "updatedAt": "2023-06-09T15:43:40Z"
+        },
+        {
+          "author": "PieterKas",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Aaron and I discussed this and concluded it may be a good topic for the IETF 117 meeting.",
+          "createdAt": "2023-06-30T15:25:19Z",
+          "updatedAt": "2023-06-30T15:25:28Z"
         }
       ]
     },
@@ -311,17 +326,17 @@
       "id": "I_kwDOJbxyLc5mCiY2",
       "title": "Is (e.g. password) the best choice in the Protocol Overview section",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gffletch",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "aaronpk"
       ],
       "labels": [],
       "body": "I'd rather we not use 'password' as an example of additional data the client can post to the AS as part of the authorization challenge endpoint. I really think this endpoint should mirror the /authorization endpoint with the purpose of supporting native authentication flows. Adding additional data in this POST seems like it adds to the complexity for Authorization Servers to implement which may limit adoption.\r\n\r\nWe could use 'username' as an example as it can be passed in the \"login_hint\" parameter (at least in OIDC). I don't see any harm in the first response of the AS as an error asking for additional information. For example, the first response may be a passkey challenge as the user doesn't even have a password.",
       "createdAt": "2023-05-16T12:37:49Z",
-      "updatedAt": "2023-06-09T16:02:16Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-30T15:17:15Z",
+      "closedAt": "2023-06-30T15:17:15Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -337,17 +352,17 @@
       "id": "I_kwDOJbxyLc5mCj22",
       "title": "Authorization Challenge Request",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gffletch",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "aaronpk"
       ],
       "labels": [],
       "body": "I think we should explicitly state that this end point supports all parameters and extensions as supported by the /authorization endpoint. The difference of this endpoint is that it returns errors with instructions on what the next step the client needs to take vs managing all that challenge/response flow in a web page.",
       "createdAt": "2023-05-16T12:41:38Z",
-      "updatedAt": "2023-06-09T16:02:17Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-30T15:14:16Z",
+      "closedAt": "2023-06-30T15:14:16Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -365,14 +380,14 @@
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/14",
       "state": "OPEN",
       "author": "gffletch",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [
         "aaronpk"
       ],
       "labels": [],
       "body": "I think we will need more clarity on how an AS can leverage this spec to produce a fully working flow. There are statements like... \"the AS MAY define additional parameters\" but the reality is the AS MUST define additional parameters to make a concrete flow work. In that sense I think we need to make that more clear.",
       "createdAt": "2023-05-16T12:49:07Z",
-      "updatedAt": "2023-06-09T16:02:17Z",
+      "updatedAt": "2023-06-30T21:46:21Z",
       "closedAt": null,
       "comments": [
         {
@@ -381,6 +396,13 @@
           "body": "We can add an appendix section describing how an AS could build a concrete implementation of this. Could reference the appendix from the main part of the spec as an example of how this could look.\r\n\r\nIn any case, we want to make sure it's clear that this is not the \"default\" implementation we expect, so doing it as an appendix will avoid that confusion.",
           "createdAt": "2023-05-19T15:12:44Z",
           "updatedAt": "2023-05-19T15:12:44Z"
+        },
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "I think this might be covered by the examples created for #15 ",
+          "createdAt": "2023-06-30T21:46:20Z",
+          "updatedAt": "2023-06-30T21:46:20Z"
         }
       ]
     },
@@ -393,14 +415,22 @@
       "author": "PieterKas",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
-        "aaronpk"
+        "PieterKas"
       ],
       "labels": [],
       "body": "e.g. use of login identifier (such as e-mail), that theAS can then use to do realm discovery (find the right IdP).",
       "createdAt": "2023-05-19T15:18:23Z",
-      "updatedAt": "2023-06-09T16:02:18Z",
+      "updatedAt": "2023-06-30T15:12:22Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "We can pull from the list of examples on the older draft:\r\n\r\nhttps://github.com/aaronpk/oauth-direct-interaction-grant/blob/main/draft-parecki-oauth-direct-interaction-grant.md#use-cases",
+          "createdAt": "2023-06-30T15:10:58Z",
+          "updatedAt": "2023-06-30T15:10:58Z"
+        }
+      ]
     },
     {
       "number": 16,
@@ -443,6 +473,126 @@
           "updatedAt": "2023-06-09T15:43:30Z"
         }
       ]
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOJbxyLc5qQdNN",
+      "title": "Add in user scenarios",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/20",
+      "state": "CLOSED",
+      "author": "PieterKas",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add user scenarios (from original draft)",
+      "createdAt": "2023-06-30T15:09:15Z",
+      "updatedAt": "2023-06-30T15:10:33Z",
+      "closedAt": "2023-06-30T15:10:33Z",
+      "comments": [
+        {
+          "author": "PieterKas",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Dube of #15 ",
+          "createdAt": "2023-06-30T15:10:33Z",
+          "updatedAt": "2023-06-30T15:10:33Z"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOJbxyLc5qQkMv",
+      "title": "Expand introduction",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/21",
+      "state": "CLOSED",
+      "author": "aaronpk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "aaronpk"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-06-30T15:26:51Z",
+      "updatedAt": "2023-06-30T22:16:01Z",
+      "closedAt": "2023-06-30T22:16:00Z",
+      "comments": []
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOJbxyLc5qQkNO",
+      "title": "Write Introduction",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/22",
+      "state": "CLOSED",
+      "author": "PieterKas",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "TODO - section - short introduction before publications",
+      "createdAt": "2023-06-30T15:26:53Z",
+      "updatedAt": "2023-06-30T22:16:13Z",
+      "closedAt": "2023-06-30T22:16:12Z",
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "duplicate of #21 ",
+          "createdAt": "2023-06-30T22:16:12Z",
+          "updatedAt": "2023-06-30T22:16:12Z"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOJbxyLc5qQkqk",
+      "title": "Document token request",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/23",
+      "state": "CLOSED",
+      "author": "aaronpk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "aaronpk"
+      ],
+      "labels": [],
+      "body": "https://aaronpk.github.io/oauth-first-party-native-apps/draft-parecki-oauth-first-party-native-apps.html#section-6\r\n\r\nDocument the token request is the same as RFC6749, and mention explicitly that no redirect_uri is sent.",
+      "createdAt": "2023-06-30T15:28:19Z",
+      "updatedAt": "2023-06-30T21:26:51Z",
+      "closedAt": "2023-06-30T21:26:51Z",
+      "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOJbxyLc5qQmMc",
+      "title": "Device session DPoP binding",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/24",
+      "state": "OPEN",
+      "author": "aaronpk",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "Do we need to have a DPoP parameter to bind the device session value?",
+      "createdAt": "2023-06-30T15:31:52Z",
+      "updatedAt": "2023-06-30T15:31:52Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOJbxyLc5qQm1G",
+      "title": "Update reference to Native SSO",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/25",
+      "state": "CLOSED",
+      "author": "aaronpk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "aaronpk"
+      ],
+      "labels": [],
+      "body": "https://openid.net/specs/openid-connect-native-sso-1_0.html\r\n",
+      "createdAt": "2023-06-30T15:33:39Z",
+      "updatedAt": "2023-06-30T21:22:28Z",
+      "closedAt": "2023-06-30T21:22:27Z",
+      "comments": []
     }
   ],
   "pulls": [
