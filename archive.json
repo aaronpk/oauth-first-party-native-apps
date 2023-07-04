@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-07-02T01:49:24.573676+00:00",
+  "timestamp": "2023-07-04T01:44:22.962498+00:00",
   "repo": "aaronpk/oauth-first-party-native-apps",
   "labels": [
     {
@@ -807,6 +807,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOJbxyLc5Uc6d2",
+      "title": "Added worked examples showing examples of the main use cases",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/pull/26",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Included use cases for OTP, e-mail, SMS confirmation, step-up authentication and registration.\r\n\r\nAlso see #14 and #15",
+      "createdAt": "2023-07-02T19:20:25Z",
+      "updatedAt": "2023-07-02T19:39:48Z",
+      "baseRepository": "aaronpk/oauth-first-party-native-apps",
+      "baseRefName": "main",
+      "baseRefOid": "89dc093de6a85c658c17803446b4ebcec1969816",
+      "headRepository": "PieterKas/oauth-first-party-native-apps",
+      "headRefName": "patch-3",
+      "headRefOid": "a0c9280ce16be811ff2aa2ac07291d5efb04ced4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
