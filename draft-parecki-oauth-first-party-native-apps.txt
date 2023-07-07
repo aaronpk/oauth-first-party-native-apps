@@ -86,7 +86,7 @@ Table of Contents
      3.2.  Refresh Token Request
      3.3.  Resource Request
    4.  Protocol Endpoints
-     4.1.  Authorization challenge endpoint
+     4.1.  Authorization Challenge Endpoint
      4.2.  Token endpoint
    5.  Authorization Initiation
      5.1.  Authorization Challenge Request
@@ -114,13 +114,17 @@ Table of Contents
    11. References
      11.1.  Normative References
      11.2.  Informative References
-   Appendix A.  Examples
+   Appendix A.  Example User Experiences
      A.1.  Passwordless One-Time Passwork (OTP)
      A.2.  E-Mail Confirmation Code
      A.3.  SMS Confirmation Code
      A.4.  Re-authenticating to an app a week later using OTP
      A.5.  Step-up Authentication using Confirmation SMS
      A.6.  Registration
+   Appendix B.  Example Implementation
+     B.1.  Authorization Challenge Request Parameters
+     B.2.  Authorization Challenge Response Parameters
+     B.3.  Example Sequence
    Acknowledgments
    Authors' Addresses
 
@@ -308,7 +312,7 @@ Table of Contents
 
 4.  Protocol Endpoints
 
-4.1.  Authorization challenge endpoint
+4.1.  Authorization Challenge Endpoint
 
    The authorization challenge endpoint is a new endpoint defined by
    this specification which the native application uses to obtain an
@@ -369,11 +373,11 @@ Table of Contents
 
    The client makes a request to the authorization challenge endpoint by
    adding the following parameters, as well as parameters from any
-   extensions, using the `application/x-www-form-urlencoded format with
-   a character encoding of UTF-8 in the HTTP request body:
+   extensions, using the application/x-www-form-urlencoded format with a
+   character encoding of UTF-8 in the HTTP request body:
 
    "client_id":  REQUIRED if the client is not authenticating with the
-      authorization server.
+      authorization server and if no device_session is included.
 
    "scope":  OPTIONAL.  The OAuth scope defined in [RFC6749].
 
@@ -636,8 +640,8 @@ Table of Contents
    cryptographic key.  Whenever the token is presented, it should be
    accompanied by a proof that the client presenting the token also
    controls the cryptographic key bound to the token.  If a proof-of-
-   posession sender constrained token is presented without valid proof
-   of posession of the cryptographic key, it MUST be rejected.
+   possession sender constrained token is presented without valid proof
+   of possession of the cryptographic key, it MUST be rejected.
 
 9.4.1.  Demonstrating Proof-of-Possession
 
@@ -668,7 +672,7 @@ Table of Contents
 
 9.4.2.  Other Proof of Possession Mechanisms
 
-   It may be possible to use other proof of posession mechanisms to
+   It may be possible to use other proof of possession mechanisms to
    sender constrain access and refresh tokens.  Defining these
    mechanisms are out of scope for this specification.
 
@@ -720,10 +724,14 @@ Table of Contents
    Authorization Server Metadata" registry of [IANA.OAuth.Parameters]
    established by [RFC8414].
 
-   *Metadata Name*: authorization_challenge_endpoint *Metadata
-   Description*: URL of the authorization server's authorization
-   challenge endpoint. *Change Controller*: IESG *Specification
-   Document*: Section 4.1 of [[ this specification ]]
+   *Metadata Name*: authorization_challenge_endpoint
+
+   *Metadata Description*: URL of the authorization server's
+   authorization challenge endpoint.
+
+   *Change Controller*: IESG
+
+   *Specification Document*: Section 4.1 of [[ this specification ]]
 
 11.  References
 
@@ -802,7 +810,7 @@ Table of Contents
               BCP 212, RFC 8252, DOI 10.17487/RFC8252, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8252>.
 
-Appendix A.  Examples
+Appendix A.  Example User Experiences
 
    This section provides non-normative examples of how this
    specification may be used to support specific use cases.
@@ -810,7 +818,7 @@ Appendix A.  Examples
 A.1.  Passwordless One-Time Passwork (OTP)
 
    In a passwordless One-Time Password (OTP) scheme, the user is in
-   posession of a one-time password generator.  This generator may be a
+   possession of a one-time password generator.  This generator may be a
    hardware device, or implemented as an app on a mobile phone.  The
    user provides a user identifier and one-time password, which is
    verified by the Authorization Server before it issues an
@@ -820,14 +828,14 @@ A.1.  Passwordless One-Time Passwork (OTP)
    *  The Client collects username and OTP from user.
 
    *  The Client sends an Authorization Challenge Request (Section 5.1)
-      to the Authorization challenge endpoint (Section 4.1) including
+      to the Authorization Challenge Endpoint (Section 4.1) including
       the username and OTP.
 
    *  The Authorization Server verifies the username and OTP and returns
       an Authorization Code.
 
-   *  The Client requests an Access Token and Refresh Token by issueing
-      a Token Request (Section 6) to the Token Endpoint.
+   *  The Client requests an Access Token and Refresh Token by issuing a
+      Token Request (Section 6) to the Token Endpoint.
 
    *  The Authorization Server verifies the Authorization Code and
       issues the requested tokens.
@@ -844,7 +852,7 @@ A.2.  E-Mail Confirmation Code
    *  The Client collects an e-mail address from the user.
 
    *  The Client sends the e-mail address in an Authorization Challenge
-      Request (Section 5.1) to the Authorization challenge endpoint
+      Request (Section 5.1) to the Authorization Challenge Endpoint
       (Section 4.1).
 
    *  The Authorization Server sends a verification code to the e-mail
@@ -856,10 +864,9 @@ A.2.  E-Mail Confirmation Code
    *  The Client presents a user experience guiding the user to copy the
       e-mail verification code to the Client.  Once the e-mail
       verification code is entered, the Client sends an Authorization
-      Challenge Request (Section 5.1) to the Authorization challenge
-      endpoint (Section 4.1), including the e-mail verification code as
-      well as the device_session parameter returned in the previous
-      Error Response.
+      Challenge Request to the Authorization Challenge Endpoint,
+      including the e-mail verification code as well as the
+      device_session parameter returned in the previous Error Response.
 
    *  The Authorization Server uses the device_session to maintain the
       session and verifies the e-mail verification code before issuing
@@ -883,7 +890,7 @@ A.3.  SMS Confirmation Code
    *  The Client collects a mobile phone number from the user.
 
    *  The Client sends the phone number in an Authorization Challenge
-      Request (Section 5.1) to the Authorization challenge endpoint
+      Request (Section 5.1) to the Authorization Challenge Endpoint
       (Section 4.1).
 
    *  The Authorization Server sends a confirmation code to the phone
@@ -894,10 +901,10 @@ A.3.  SMS Confirmation Code
 
    *  The Client presents a user experience guiding the user to enter
       the SMS confirmation code.  Once the SMS verification code is
-      entered, the Client sends an Authorization Challenge Request
-      (Section 5.1) to the Authorization challenge endpoint
-      (Section 4.1), including the confirmation code as well as the
-      device_session parameter returned in the previous Error Response.
+      entered, the Client sends an Authorization Challenge Request to
+      the Authorization Challenge Endpoint, including the confirmation
+      code as well as the device_session parameter returned in the
+      previous Error Response.
 
    *  The Authorization Server uses the device_session to maintain the
       session context and verifies the SMS code before issuing an
@@ -942,8 +949,8 @@ A.4.  Re-authenticating to an app a week later using OTP
    *  The Client prompts the user to enter an OTP.
 
    *  The Client sends the OTP and device_session in an Authorization
-      Challenge Request (Section 5.1) to the Authorization challenge
-      endpoint (Section 4.1).
+      Challenge Request (Section 5.1) to the Authorization Challenge
+      Endpoint (Section 4.1).
 
    *  The Authorization Server verifies the device_session and OTP, and
       returns an Authorization Code.
@@ -983,7 +990,7 @@ A.5.  Step-up Authentication using Confirmation SMS
       along with the desired acr_values and desired max_age.
 
    *  The Client sends an Authorization Challenge Request (Section 5.1)
-      to the Authorization challenge endpoint (Section 4.1) including
+      to the Authorization Challenge Endpoint (Section 4.1) including
       the device_session, acr_values and max_age parameters.
 
    *  The Authorization Server verifies the device_session and
@@ -995,9 +1002,9 @@ A.5.  Step-up Authentication using Confirmation SMS
    *  The Client prompts the user for an OTP, which the user obtains and
       enters.
 
-   *  The Client sends an Authorization Challenge Request (Section 5.1)
-      to the Authorization challenge endpoint (Section 4.1) including
-      the device_session and OTP.
+   *  The Client sends an Authorization Challenge Request to the
+      Authorization Challenge Endpoint including the device_session and
+      OTP.
 
    *  The Authorization Server verifies the OTP and returns an
       Authorization Code.
@@ -1025,7 +1032,7 @@ A.6.  Registration
    *  The Client collects a username from the user.
 
    *  The Client sends an Authorization Challenge Request (Section 5.1)
-      to the Authorization challenge endpoint (Section 4.1) including
+      to the Authorization Challenge Endpoint (Section 4.1) including
       the username.
 
    *  The Authorization Server returns an Error Response (Section 5.2.2)
@@ -1036,50 +1043,46 @@ A.6.  Registration
    *  The Client collects an e-mail address from the user.
 
    *  The Client sends the e-mail address as part of a second
-      Authorization Challenge Request (Section 5.1) to the Authorization
-      challenge endpoint (Section 4.1), along with the device_session
-      parameter.
+      Authorization Challenge Request to the Authorization Challenge
+      Endpoint, along with the device_session parameter.
 
    *  The Authorization Server sends a verification code to the e-mail
-      address and returns an Error Response (Section 5.2.2) including
-      "error": "authorization_required", "device_session" and a custom
-      error code indicating that an e-mail verification code must be
-      entered.
+      address and returns an Error Response including "error":
+      "authorization_required", "device_session" and a custom error code
+      indicating that an e-mail verification code must be entered.
 
    *  The Client presents a user experience guiding the user to copy the
       e-mail verification code to the Client.  Once the e-mail
       verification code is entered, the Client sends an Authorization
-      Challenge Request (Section 5.1) to the Authorization challenge
-      endpoint (Section 4.1), including the e-mail verification code as
-      well as the device_session parameter returned in the previous
-      Error Response.
+      Challenge Request to the Authorization Challenge Endpoint,
+      including the e-mail verification code as well as the
+      device_session parameter returned in the previous Error Response.
 
    *  The Authorization Server uses the device_session to maintain the
       session context, and verifies the e-mail verification code.  It
       determines that it also needs a phone number for account recovery
-      purposes and returns an Error Response (Section 5.2.2) including
-      "error": "authorization_required", "device_session" and a custom
-      error code indicating that a phone number must be collected.
+      purposes and returns an Error Response including "error":
+      "authorization_required", "device_session" and a custom error code
+      indicating that a phone number must be collected.
 
    *  The Client collects a mobile phone number from the user.
 
    *  The Client sends the phone number in an Authorization Challenge
-      Request (Section 5.1) to the Authorization challenge endpoint
-      (Section 4.1), along with the device_session.
+      Request to the Authorization Challenge Endpoint, along with the
+      device_session.
 
    *  The Authorization Server uses the device_session parameter to link
       the previous requests.  It sends a confirmation code to the phone
-      number and returns an Error Response (Section 5.2.2) including
-      "error": "authorization_required", "device_session" and a custom
-      error code indicating that a SMS confirmation code must be
-      entered.
+      number and returns an Error Response including "error":
+      "authorization_required", "device_session" and a custom error code
+      indicating that a SMS confirmation code must be entered.
 
    *  The Client presents a user experience guiding the user to enter
       the SMS confirmation code.  Once the SMS verification code is
-      entered, the Client sends an Authorization Challenge Request
-      (Section 5.1) to the Authorization challenge endpoint
-      (Section 4.1), including the confirmation code as well as the
-      device_session parameter returned in the previous Error Response.
+      entered, the Client sends an Authorization Challenge Request to
+      the Authorization Challenge Endpoint, including the confirmation
+      code as well as the device_session parameter returned in the
+      previous Error Response.
 
    *  The Authorization Server uses the device_session to maintain the
       session context, and verifies the SMS verification code before
@@ -1090,6 +1093,113 @@ A.6.  Registration
 
    *  The Authorization Server verifies the Authorization Code and
       issues the requested tokens.
+
+Appendix B.  Example Implementation
+
+   In order to successfully implement this specification, the
+   Authorization Server will need to define its own specific
+   requirements for what values clients are expected to send in the
+   Authorization Challenge Request (Section 5.1), as well as its own
+   specific error codes in the Authorization Challenge Response
+   (Section 5.2).
+
+   Below is an example of parameters required for a complete
+   implementation that enables the user to log in with a username and
+   OTP.
+
+B.1.  Authorization Challenge Request Parameters
+
+   In addition to the request parameters defined in Section 5.1, the
+   authorization server defines the additional parameters below.
+
+   "username":  REQUIRED for the initial Authorization Challenge
+      Request.
+
+   "otp":  The OTP collected from the user.  REQUIRED when re-trying an
+      Authorization Challenge Request in response to the otp_required
+      error defined below.
+
+B.2.  Authorization Challenge Response Parameters
+
+   In addition to the response parameters defined in Section 5.2, the
+   authorization server defines the additional value for the error
+   response below.
+
+   "otp_required":  The client should collect an OTP from the user and
+      send the OTP in a second request to the Authorization Challenge
+      Endpoint.  The HTTP response code to use with this error value is
+      401 Unauthorized.
+
+B.3.  Example Sequence
+
+   The client prompts the user to enter their username, and sends the
+   username in an initial Authorization Challenge Request.
+
+   POST /authorize HTTP/1.1
+   Host: server.example.com
+   Content-Type: application/x-www-form-urlencoded
+
+   username=alice
+   &scope=photos
+   &client_id=bb16c14c73415
+
+   The Authorization Server sends an error response indicating that an
+   OTP is required.
+
+   HTTP/1.1 401 Unauthorized
+   Content-Type: application/json
+   Cache-Control: no-store
+
+   {
+     "error": "otp_required",
+     "device_session": "ce6772f5e07bc8361572f"
+   }
+
+   The client prompts the user for an OTP, and sends a new Authorization
+   Challenge Request.
+
+   POST /authorize HTTP/1.1
+   Host: server.example.com
+   Content-Type: application/x-www-form-urlencoded
+
+   device_session=ce6772f5e07bc8361572f
+   &otp=555121
+
+   The Authorization Server validates the device_session to find the
+   expected user, then validates the OTP for that user, and responds
+   with an authorization code.
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   Cache-Control: no-store
+
+   {
+     "authorization_code": "uY29tL2F1dGhlbnRpY"
+   }
+
+   The client sends the authorization code to the token endpoint.
+
+   POST /token HTTP/1.1
+   Host: server.example.com
+   Content-Type: application/x-www-form-urlencoded
+
+   grant_type=authorization_code
+   &client_id=bb16c14c73415
+   &code=uY29tL2F1dGhlbnRpY
+
+   The Authorization Server responds with an access token and refresh
+   token.
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   Cache-Control: no-store
+
+   {
+     "token_type": "Bearer",
+     "expires_in": 3600,
+     "access_token": "d41c0692f1187fd9b326c63d",
+     "refresh_token": "e090366ac1c448b8aed84cbc07"
+   }
 
 Acknowledgments
 
