@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OAuth for First-Party Native Apps</td>
-<td class="right">June 2023</td>
+<td class="right">July 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Parecki, et al.</td>
-<td class="center">Expires 1 January 2024</td>
+<td class="center">Expires 8 January 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-parecki-oauth-first-party-native-apps-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-06-30" class="published">30 June 2023</time>
+<time datetime="2023-07-07" class="published">7 July 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-01-01">1 January 2024</time></dd>
+<dd class="expires"><time datetime="2024-01-08">8 January 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1138,7 +1138,7 @@ applications, only delegating to the browser in unexpected, high risk, or error 
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 January 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 January 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1305,6 +1305,26 @@ applications, only delegating to the browser in unexpected, high risk, or error 
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-passwordless-one-time-passw" class="internal xref">Passwordless One-Time Passwork (OTP)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
+                <p id="section-toc.1-1.12.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-e-mail-confirmation-code" class="internal xref">E-Mail Confirmation Code</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
+                <p id="section-toc.1-1.12.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-sms-confirmation-code" class="internal xref">SMS Confirmation Code</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.4">
+                <p id="section-toc.1-1.12.2.4.1"><a href="#appendix-A.4" class="auto internal xref">A.4</a>.  <a href="#name-re-authenticating-to-an-app" class="internal xref">Re-authenticating to an app a week later using OTP</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
+                <p id="section-toc.1-1.12.2.5.1"><a href="#appendix-A.5" class="auto internal xref">A.5</a>.  <a href="#name-step-up-authentication-usin" class="internal xref">Step-up Authentication using Confirmation SMS</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
+                <p id="section-toc.1-1.12.2.6.1"><a href="#appendix-A.6" class="auto internal xref">A.6</a>.  <a href="#name-registration" class="internal xref">Registration</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
@@ -1438,7 +1458,7 @@ and "Token Endpoint" defined by <span>[<a href="#RFC6749" class="cite xref">RFC6
 </li>
           <li class="normal" id="section-3.1-3.2">(B) The client initiates the authorization request by making a POST request to the Authorization Challenge Endpoint, optionally with information collected from the user (e.g. email or username)<a href="#section-3.1-3.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.1-3.3">(C) The authorization server determines whether the information provided to the Authorization Challenge Endpoint is sufficient to grant authorization, and either responds with an authorization code or responds with an error. In this example, it determines that additional information is needed and responds with an error. The error may contain additional information to guide the Client on what information to collect next. This pattern of collecting information, submitting it to the Authorization Challenge Endpoint and then receing an error or authroization code may repeat several times.<a href="#section-3.1-3.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.1-3.3">(C) The authorization server determines whether the information provided to the Authorization Challenge Endpoint is sufficient to grant authorization, and either responds with an authorization code or responds with an error. In this example, it determines that additional information is needed and responds with an error. The error may contain additional information to guide the Client on what information to collect next. This pattern of collecting information, submitting it to the Authorization Challenge Endpoint and then receing an error or authorization code may repeat several times.<a href="#section-3.1-3.3" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-3.1-3.4">(D) The client gathers additional information (e.g. passkey, or one-time code from email) and makes a POST request to the Authorization Challenge Endpoint.<a href="#section-3.1-3.4" class="pilcrow">¶</a>
 </li>
@@ -1827,7 +1847,7 @@ an authorization request and eventually obtain an authorization code.<a href="#s
           <h4 id="name-demonstrating-proof-of-poss">
 <a href="#section-9.4.1" class="section-number selfRef">9.4.1. </a><a href="#name-demonstrating-proof-of-poss" class="section-name selfRef">Demonstrating Proof-of-Possession</a>
           </h4>
-<p id="section-9.4.1-1">DPoP is an application-level mechanism for sender-constraining OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> access and refresh tokens <span>[<a href="#I-D.ietf-oauth-dpop" class="cite xref">I-D.ietf-oauth-dpop</a>]</span>. If DPoP is used to sender constrain tokens, the native client <span class="bcp14">SHOULD</span> use DPoP for every token request to the Authroization Server and interaction with the Resource Server.<a href="#section-9.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.4.1-1">DPoP is an application-level mechanism for sender-constraining OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> access and refresh tokens <span>[<a href="#I-D.ietf-oauth-dpop" class="cite xref">I-D.ietf-oauth-dpop</a>]</span>. If DPoP is used to sender constrain tokens, the native client <span class="bcp14">SHOULD</span> use DPoP for every token request to the authorization Server and interaction with the Resource Server.<a href="#section-9.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.4.1-2">DPoP includes an optional capability to bind the authorization code to the DPoP key to enable end-to-end binding of the entire authorization flow. If an attacker can access the Authorization Code and PKCE code verifier as described in Section 11.9 of <span>[<a href="#I-D.ietf-oauth-dpop" class="cite xref">I-D.ietf-oauth-dpop</a>]</span>, Authorization Code binding <span class="bcp14">SHOULD</span> be used.<a href="#section-9.4.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.4.1-3">To bind the authorization code using the Authorization Challenge Endpoint, the JWK Thumbprint of the DPoP key <span class="bcp14">MUST</span> be communicated to the Authorization Server by including the <code>dpop_jkt</code> parameter defined in section 10 of <span>[<a href="#I-D.ietf-oauth-dpop" class="cite xref">I-D.ietf-oauth-dpop</a>]</span> alongside other authorization request parameters in the POST body of the first Authorization Challenge Request. If it is included in subsequent Authorization Challenge Requests, the value of this parameter must be the same as in the initial request. If the JWK Thumbprint in the <code>dpop_jkt</code> differ at any point, the Authorization Server <span class="bcp14">MUST</span> reject the request. If the <code>dpop_jkt</code> parameter is not included in the first request, but added in subsequent requests, the Authorization Server <span class="bcp14">MUST</span> reject the request (do we need to define a specific error code for that?).<a href="#section-9.4.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1984,7 +2004,175 @@ an authorization request and eventually obtain an authorization code.<a href="#s
       <h2 id="name-examples">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
-<p id="appendix-A-1">TBD<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">This section provides non-normative examples of how this specification may be used to support specific use cases.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div id="passwordless-one-time-passwork-otp">
+<section id="appendix-A.1">
+        <h3 id="name-passwordless-one-time-passw">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-passwordless-one-time-passw" class="section-name selfRef">Passwordless One-Time Passwork (OTP)</a>
+        </h3>
+<p id="appendix-A.1-1">In a passwordless One-Time Password (OTP) scheme, the user is in posession of a one-time password generator. This generator may be a hardware device, or implement as an app on a mobile phone. The user provides a user identifier and one-time password, which is verified by the Authorization Server before it issues an Authorization Code, which can be exchanged for an Access and Refresh Token.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.1-2.1">The Client collects username and OTP from user.<a href="#appendix-A.1-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.1-2.2">The Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span> including the username and OTP<a href="#appendix-A.1-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.1-2.3">The Authorization Server verifies the username and OTP and returns an Authorization Code.<a href="#appendix-A.1-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.1-2.4">The Client requests an Access Token and Refresh Token by issueing a <span><a href="#token-request" class="internal xref">Token Request</a> (<a href="#token-request" class="auto internal xref">Section 6</a>)</span> to the Token Endpoint.<a href="#appendix-A.1-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.1-2.5">The Authorization Server verifies the Authorization Code and issues the requested tokens.<a href="#appendix-A.1-2.5" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="e-mail-confirmation-code">
+<section id="appendix-A.2">
+        <h3 id="name-e-mail-confirmation-code">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-e-mail-confirmation-code" class="section-name selfRef">E-Mail Confirmation Code</a>
+        </h3>
+<p id="appendix-A.2-1">A user may be required to provide an e-mail confirmation code as part of an authentication ceremony to prove they control an e-mail address. The user provides an e-mail address and is then requried to enter a verification code sent to the e-mail address. If the correct verification code is returned to the Authorization Server it, issues Access and Refresh Tokens.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.2-2.1">The Client collects an e-mail address from the user.<a href="#appendix-A.2-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.2-2.2">The Client sends the e-mail address as part of an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>.<a href="#appendix-A.2-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.2-2.3">The Authorization Server sends a verification code to the e-mail address and returns an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that and e-mail verification code must be entered.<a href="#appendix-A.2-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.2-2.4">The Client presents a user experience guiding the user to copy the e-mail verification code to the Client. Once the e-mail verification code is entered, the Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>, including the e-mail verification code as well as the "device_session" parameter returned in the previous Error Response.<a href="#appendix-A.2-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.2-2.5">The Authorization Server uses the "device_session" to maintain the session and verifies the e-mail verification code before issueing an Authorization Code to the Client.<a href="#appendix-A.2-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.2-2.6">The Client requests an Access Token and Refresh Token by issueing a <span><a href="#token-request" class="internal xref">Token Request</a> (<a href="#token-request" class="auto internal xref">Section 6</a>)</span> to the Token Endpoint.<a href="#appendix-A.2-2.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.2-2.7">The Authorization Server verifies the Authorization Code and issues the requested tokens.<a href="#appendix-A.2-2.7" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="sms-confirmation-code">
+<section id="appendix-A.3">
+        <h3 id="name-sms-confirmation-code">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-sms-confirmation-code" class="section-name selfRef">SMS Confirmation Code</a>
+        </h3>
+<p id="appendix-A.3-1">A user may be required to provide SMS confirmation code as part of an authentication ceremony to prove they control a mobile phone number. The user provides a phone number and is then requried to enter a SMS confirmation code sent to the e-mail address. If the correct confirmation code is returned to the Authorization Server, it issues Access and Refresh Tokens.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.3-2.1">The Client collects a mobile phone number from the user.<a href="#appendix-A.3-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.3-2.2">The Client sends the phone number as part of an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>.<a href="#appendix-A.3-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.3-2.3">The Authorization Server sends a confirmation code to the phone number and returns an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that a SMS confirmation code must be entered.<a href="#appendix-A.3-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.3-2.4">The Client presents a user experience guiding the user to enter the SMS confirmation code. Once the SMS verification code is entered, the Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>, including the confirmation code as well as the "device_session" parameter returned in the previous Error Response.<a href="#appendix-A.3-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.3-2.5">The Authorization Server uses the "device_session" to maintain the session and verifies the e-mail verification code before issueing an Authorization Code to the Client.<a href="#appendix-A.3-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.3-2.6">The Client requests an Access Token and Refresh Token by issueing a <span><a href="#token-request" class="internal xref">Token Request</a> (<a href="#token-request" class="auto internal xref">Section 6</a>)</span> to the Token Endpoint.<a href="#appendix-A.3-2.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.3-2.7">The Authorization Server verifies the Authorization Code and issues the requested tokens.<a href="#appendix-A.3-2.7" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="re-authenticating-to-an-app-a-week-later-using-otp">
+<section id="appendix-A.4">
+        <h3 id="name-re-authenticating-to-an-app">
+<a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-re-authenticating-to-an-app" class="section-name selfRef">Re-authenticating to an app a week later using OTP</a>
+        </h3>
+<p id="appendix-A.4-1">A client may be in posession of an Access and Refresh Token as the result of a previous succesfull user authentication. The user returns to the app a week later and access the app. The Client presents the Access Token, but receives an error indicating the Access token is no longer valid. The Client presents a Refresh Token to the Authorization Server to obtain a new Access Token. If the Authorization Server requires user interaction, it rejects the Refreh Token and the Client re-starts the user authentication flow to obtain new Access and Refresh tokens.<a href="#appendix-A.4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.4-2.1">The Client has a short lived access token and long lived refresh token following the completion of an Authorization Grant Flow which included user authentication.<a href="#appendix-A.4-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.2">A week later, the user launches the app and tries to access a protected resource at the Resource Server.<a href="#appendix-A.4-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.3">The Resource Server issues an error code indicating an invalid access token since it has expired.<a href="#appendix-A.4-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.4">The Client presents the refresh token to obtain a new access token (section 6 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>)<a href="#appendix-A.4-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.5">The Client collects username and OTP from user.<a href="#appendix-A.4-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.6">The Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span> including the username and OTP<a href="#appendix-A.4-2.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.7">The Authorization Server verifies the username and OTP and returns an Authorization Code.<a href="#appendix-A.4-2.7" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.8">The Client requests an Access Token and Refresh Token by issueing a <span><a href="#token-request" class="internal xref">Token Request</a> (<a href="#token-request" class="auto internal xref">Section 6</a>)</span> to the Token Endpoint.<a href="#appendix-A.4-2.8" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.9">The Authorization Server verifies the Authorization Code and issues the requested tokens.<a href="#appendix-A.4-2.9" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.4-2.10">The Client presents the Access Token to the Resources Server in order to access the prtoected resource.<a href="#appendix-A.4-2.10" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="step-up-authentication-using-confirmation-sms">
+<section id="appendix-A.5">
+        <h3 id="name-step-up-authentication-usin">
+<a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-step-up-authentication-usin" class="section-name selfRef">Step-up Authentication using Confirmation SMS</a>
+        </h3>
+<p id="appendix-A.5-1">A Client obtained an Access and Refresh Token after the user authenticates with an OTP. When the user attempts to access a protected resource, the Resource Server determines that it needs an additional level of authentication and triggers a step-up authentication, indicating the desired level of authentication using "acr_values" and "max_age" as define in the Step-up Authentication specification. The Client collects the user identifier and initiates an authorization request with the Authorization Server indicating the "acr_values" and "max_age" parameters. The Authorization Server responds with error messages promptng for additional authentication until the "acr_values" and "max_age" values are satisfied before issueing fresh Access and Refresh Tokens.<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.5-2.1">The Client has a short lived access token and long lived refresh token following the completion of an Authorization Grant Flow which included user authentication.<a href="#appendix-A.5-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.2">When the Client presents the Access token to the Resource Server, the Resource Server determines that the "acr" claim in the Access Token is insufficient given the resource the user wants to access and responds with an "insufficient_user_authentication" error code, along with the desired "acr_values" and desired "max_age".<a href="#appendix-A.5-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.3">The Client collects username and sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span> including the username, "acr_values" and "max_age" parameters.<a href="#appendix-A.5-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.4">The Authorization Server verifies the username and determines which authentication methods must be satisfied based on the "acr_values" and responds with an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that an OTP must be entered.<a href="#appendix-A.5-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.5">The Client prompts the user for an OTP, which the user obtains and enters.<a href="#appendix-A.5-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.6">The Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span> including the username and OTP<a href="#appendix-A.5-2.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.7">The Authorization Server verifies the username and OTP and returns an Authorization Code.<a href="#appendix-A.5-2.7" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.8">The Client requests an Access Token and Refresh Token by issueing a <span><a href="#token-request" class="internal xref">Token Request</a> (<a href="#token-request" class="auto internal xref">Section 6</a>)</span> to the Token Endpoint.<a href="#appendix-A.5-2.8" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.9">The Authorization Server verifies the Authorization Code and issues an Access Token with the updated "acr" value along with the Refresh Token.<a href="#appendix-A.5-2.9" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.5-2.10">The Client presents the Access Token to the Resources Server, which verifies that the "acr" value meets its requirements before granting access to the prtoected resource.<a href="#appendix-A.5-2.10" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="registration">
+<section id="appendix-A.6">
+        <h3 id="name-registration">
+<a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-registration" class="section-name selfRef">Registration</a>
+        </h3>
+<p id="appendix-A.6-1">This example describes how you can use the mechanisms defined in this draft to create a complete user registration flow starting with an email address. In this example, it is the AS policy to allow these challenges to be sent to email and phone number that were previously unrecognized, and creating the user account on the fly.<a href="#appendix-A.6-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.6-2.1">The Client collects a username from the user.<a href="#appendix-A.6-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.2">The Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span> including the username.<a href="#appendix-A.6-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.3">The Authorization Server returns an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that an e-mail address must be collected.<a href="#appendix-A.6-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.4">The Client collects an e-mail address from the user.<a href="#appendix-A.6-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.5">The Client sends the e-mail address as part of a second <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>, along with the "device_session" parameter.<a href="#appendix-A.6-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.6">The Authorization Server sends a verification code to the e-mail address and returns an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that and e-mail verification code must be entered.<a href="#appendix-A.6-2.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.7">The Client presents a user experience guiding the user to copy the e-mail verification code to the Client. Once the e-mail verification code is entered, the Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>, including the e-mail verification code as well as the "device_session" parameter returned in the previous Error Response.<a href="#appendix-A.6-2.7" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.8">The Authorization Server uses the "device_session" to maintain the session and verifies the e-mail verification code. It determines that it also needs a phone number for account recovery purposes and returns an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that and phone number must be collected.<a href="#appendix-A.6-2.8" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.9">The Client collects a mobile phone number from the user.<a href="#appendix-A.6-2.9" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.10">The Client sends the phone number as part of an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>.<a href="#appendix-A.6-2.10" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.11">The Authorization Server uses the "device_session" parameter to link the previous requests. It sends a confirmation code to the phone number and returns an <span><a href="#error-response" class="internal xref">Error Response</a> (<a href="#error-response" class="auto internal xref">Section 5.2.2</a>)</span> including a "error": "authorization_required", "device_session" and a custom error code indicating that a SMS confirmation code must be entered.<a href="#appendix-A.6-2.11" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.12">The Client presents a user experience guiding the user to enter the SMS confirmation code. Once the SMS verification code is entered, the Client sends an <span><a href="#authorization-challenge-request" class="internal xref">Authorization Challenge Request</a> (<a href="#authorization-challenge-request" class="auto internal xref">Section 5.1</a>)</span> to the <span><a href="#authorization-challenge-endpoint" class="internal xref">Authorization challenge endpoint</a> (<a href="#authorization-challenge-endpoint" class="auto internal xref">Section 4.1</a>)</span>, including the confirmation code as well as the "device_session" parameter returned in the previous Error Response.<a href="#appendix-A.6-2.12" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.13">The Authorization Server uses the "device_session" to maintain the session and verifies the e-mail verification code before issueing an Authorization Code to the Client.<a href="#appendix-A.6-2.13" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.14">The Client requests an Access Token and Refresh Token by issueing a <span><a href="#token-request" class="internal xref">Token Request</a> (<a href="#token-request" class="auto internal xref">Section 6</a>)</span> to the Token Endpoint.<a href="#appendix-A.6-2.14" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-A.6-2.15">The Authorization Server verifies the Authorization Code and issues the requested tokens.<a href="#appendix-A.6-2.15" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="acknowledgments">
