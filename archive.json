@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-07-04T01:44:22.962498+00:00",
+  "timestamp": "2023-07-09T01:50:54.102653+00:00",
   "repo": "aaronpk/oauth-first-party-native-apps",
   "labels": [
     {
@@ -224,15 +224,15 @@
       "id": "I_kwDOJbxyLc5mCbL_",
       "title": "Should we allow 3rd party apps as long as the only challenge method is passkey?",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gffletch",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The current draft lists the requirements as \"MUST NOT\" allow 3rd party clients to use this specification. Do we want to be that strong? Or leave it as is for now and change it later when there is more data and maybe implementation experience?",
       "createdAt": "2023-05-16T12:19:20Z",
-      "updatedAt": "2023-06-30T15:25:12Z",
-      "closedAt": null,
+      "updatedAt": "2023-07-07T15:12:20Z",
+      "closedAt": "2023-07-07T15:12:20Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -292,10 +292,12 @@
       "author": "gffletch",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "question"
+      ],
       "body": "I think we will want to require all native apps to implement PKCE at the native endpoint even though it's not really needed for full native experiences. However, if the AS determines the client needs to fallback to the web based redirect flow, it would be good if all the PKCE parameters are in place for the authorization. The fallback is really a continuation of the current authorization (not a new one) and hence it would be good for the AS to provide a redirect URI that continues the authentication \"session\" and hence the final call for tokens needs to be protected by PKCE.",
       "createdAt": "2023-05-16T12:29:19Z",
-      "updatedAt": "2023-06-30T15:25:28Z",
+      "updatedAt": "2023-07-07T15:12:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -378,7 +380,7 @@
       "id": "I_kwDOJbxyLc5mCm1W",
       "title": "Need a non-normative example showing how the AS extends the spec to make it all work",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/14",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gffletch",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -387,8 +389,8 @@
       "labels": [],
       "body": "I think we will need more clarity on how an AS can leverage this spec to produce a fully working flow. There are statements like... \"the AS MAY define additional parameters\" but the reality is the AS MUST define additional parameters to make a concrete flow work. In that sense I think we need to make that more clear.",
       "createdAt": "2023-05-16T12:49:07Z",
-      "updatedAt": "2023-06-30T21:46:21Z",
-      "closedAt": null,
+      "updatedAt": "2023-07-07T17:27:37Z",
+      "closedAt": "2023-07-07T17:27:36Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -411,7 +413,7 @@
       "id": "I_kwDOJbxyLc5mXcq4",
       "title": "Include non-normative examples in the Appendix",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -420,8 +422,8 @@
       "labels": [],
       "body": "e.g. use of login identifier (such as e-mail), that theAS can then use to do realm discovery (find the right IdP).",
       "createdAt": "2023-05-19T15:18:23Z",
-      "updatedAt": "2023-06-30T15:12:22Z",
-      "closedAt": null,
+      "updatedAt": "2023-07-07T16:08:34Z",
+      "closedAt": "2023-07-07T16:08:34Z",
       "comments": [
         {
           "author": "aaronpk",
@@ -446,9 +448,24 @@
       ],
       "body": "Two options for web redirect fallback:\r\n\r\n* Should we return a PAR URI and the client starts the web flow with a PAR request URI? Scopes would have already been requested before this point.\r\n* Should we return a device session and then start a new OAuth flow (either PAR or normal). Client would also request new scopes for this flow.\r\n",
       "createdAt": "2023-06-09T15:27:35Z",
-      "updatedAt": "2023-06-09T15:27:35Z",
+      "updatedAt": "2023-07-07T15:24:09Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "In either case, we want to make sure that the user can resume the flow without having to start the UX from scratch. We don't want the user to have to re-enter their username or anything, just jump into the middle of the flow in the browser. ",
+          "createdAt": "2023-07-07T15:18:16Z",
+          "updatedAt": "2023-07-07T15:18:16Z"
+        },
+        {
+          "author": "PieterKas",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Aaron's suggestion - describe how it should be done, and then point out this is compatible with PAR.",
+          "createdAt": "2023-07-07T15:24:09Z",
+          "updatedAt": "2023-07-07T15:24:09Z"
+        }
+      ]
     },
     {
       "number": 17,
@@ -572,9 +589,24 @@
       ],
       "body": "Do we need to have a DPoP parameter to bind the device session value?",
       "createdAt": "2023-06-30T15:31:52Z",
-      "updatedAt": "2023-06-30T15:31:52Z",
+      "updatedAt": "2023-07-07T15:31:42Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "OWNER",
+          "body": "Without DPoP binding, device session values should be one-time use.",
+          "createdAt": "2023-07-07T15:29:16Z",
+          "updatedAt": "2023-07-07T15:29:16Z"
+        },
+        {
+          "author": "PieterKas",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "DPoP Section 4.2 defines the extension mechanism.",
+          "createdAt": "2023-07-07T15:31:42Z",
+          "updatedAt": "2023-07-07T15:31:42Z"
+        }
+      ]
     },
     {
       "number": 25,
@@ -813,24 +845,26 @@
       "id": "PR_kwDOJbxyLc5Uc6d2",
       "title": "Added worked examples showing examples of the main use cases",
       "url": "https://github.com/aaronpk/oauth-first-party-native-apps/pull/26",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "PieterKas",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Included use cases for OTP, e-mail, SMS confirmation, step-up authentication and registration.\r\n\r\nAlso see #14 and #15",
       "createdAt": "2023-07-02T19:20:25Z",
-      "updatedAt": "2023-07-02T19:39:48Z",
+      "updatedAt": "2023-07-07T14:31:32Z",
       "baseRepository": "aaronpk/oauth-first-party-native-apps",
       "baseRefName": "main",
       "baseRefOid": "89dc093de6a85c658c17803446b4ebcec1969816",
       "headRepository": "PieterKas/oauth-first-party-native-apps",
       "headRefName": "patch-3",
       "headRefOid": "a0c9280ce16be811ff2aa2ac07291d5efb04ced4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-07-07T14:31:32Z",
+      "mergedAt": "2023-07-07T14:31:32Z",
+      "mergedBy": "aaronpk",
+      "mergeCommit": {
+        "oid": "81b4f762e9eec604731092e4b6845c014fce5d63"
+      },
       "comments": [],
       "reviews": []
     }
