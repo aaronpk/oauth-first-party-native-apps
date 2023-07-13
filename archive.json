@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-07-09T01:50:54.102653+00:00",
+  "timestamp": "2023-07-13T01:46:17.622945+00:00",
   "repo": "aaronpk/oauth-first-party-native-apps",
   "labels": [
     {
@@ -624,6 +624,22 @@
       "createdAt": "2023-06-30T15:33:39Z",
       "updatedAt": "2023-06-30T21:22:28Z",
       "closedAt": "2023-06-30T21:22:27Z",
+      "comments": []
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOJbxyLc5rP158",
+      "title": "Better name for \"device session\"",
+      "url": "https://github.com/aaronpk/oauth-first-party-native-apps/issues/27",
+      "state": "OPEN",
+      "author": "aaronpk",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "\"Device session\" is too overloaded of a term, and we might need something more specifically scoped to this spec. For example `authorization_challenge_request_transaction` or `auth_req_txn` or something. The point is to make sure it's clear that this identifier is for this specific authorization challenge sequence, but not necessarily as permanent as what you might think of as a device's session.\r\n\r\nFor example, CIBA has `auth_req_id` https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html#rfc.section.7.3",
+      "createdAt": "2023-07-11T16:28:34Z",
+      "updatedAt": "2023-07-11T16:29:55Z",
+      "closedAt": null,
       "comments": []
     }
   ],
